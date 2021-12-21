@@ -1,0 +1,44 @@
+[
+    {
+        "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
+        "file_last_write": 1640118487.0,
+        "definitions": [
+            {
+                "usr": "c:@F@rcpparma_hello_world#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_hello_world",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
+                "line": 18,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rcpparma_outerproduct#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_outerproduct(const int &)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
+                "line": 30,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@rcpparma_innerproduct#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_innerproduct(const int &)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
+                "line": 38,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@rcpparma_bothproducts#&1I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "rcpparma_bothproducts(const int &)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
+                "line": 47,
+                "column": 12
+            }
+        ]
+    }
+]
