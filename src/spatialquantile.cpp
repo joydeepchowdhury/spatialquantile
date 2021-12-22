@@ -5,8 +5,13 @@
 
 // [[Rcpp::export]]
 arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, arma::vec t_vector){
-  // Checking whether there is only one distinct observation in Data_original
+  int n = Data.nrow();
+  int p = Data.ncol();
   
+  int i, j, k;
+  
+  // Checking whether there is only one distinct observation in Data_original
+  arma::vec z
   z = Data_original(1,:);
   Difference = ones(size(Data_original,1),1) * z - Data_original;
   norm_Difference = sqrt(trapz(t_vector, Difference.^2, 2));
