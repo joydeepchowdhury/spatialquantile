@@ -23,6 +23,15 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     }
   }
   
+  arma::vec norm_difference(n);
+  double temp1;
+  for (i = 0; i < n; ++i){
+    temp1 = 0;
+    for (j = 0; j < (p - 1); ++j){
+      temp1 = temp1 + ((pow(Difference(i, j+1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
+    }
+    norm_difference[i] = sqrt(temp1);
+  }
   z = Data_original(1,:);
   Difference = ones(size(Data_original,1),1) * z - Data_original;
   norm_Difference = sqrt(trapz(t_vector, Difference.^2, 2));
