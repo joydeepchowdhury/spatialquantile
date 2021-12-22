@@ -11,7 +11,18 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   int i, j, k;
   
   // Checking whether there is only one distinct observation in Data_original
-  arma::vec z
+  arma::vec z(p);
+  for (i = 0; i < p; ++i){
+    z[i] = Data(1, i);
+  }
+  
+  arma::mat Difference(n, p);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < p; ++j){
+      Difference(i, j) = z[j] - Data(i, j);
+    }
+  }
+  
   z = Data_original(1,:);
   Difference = ones(size(Data_original,1),1) * z - Data_original;
   norm_Difference = sqrt(trapz(t_vector, Difference.^2, 2));
