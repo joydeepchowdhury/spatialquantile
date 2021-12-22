@@ -4,7 +4,21 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-uint64_t choose_rcpp(uint64_t n, uint64_t k){
-  if(k == 0) return 1;
-  return (n * choose_rcpp(n - 1, k - 1)) / k;
+arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, arma::vec t_vector){
+  // Checking whether there is only one distinct observation in Data_original
+  
+  z = Data_original(1,:);
+  Difference = ones(size(Data_original,1),1) * z - Data_original;
+  norm_Difference = sqrt(trapz(t_vector, Difference.^2, 2));
+  if (sum(norm_Difference) == 0){
+    Quantile = Data_original;
+    return
+  }
+    
+  // Dimension reduction for the input data
+      
+  n = size(Data_original,1);
+  if sum(Weights) ~= 1
+  Weights = Weights / sum(Weights);
+  end
 }
