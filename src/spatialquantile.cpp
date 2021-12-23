@@ -81,6 +81,15 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       Centered_Data(i, j) = Data(i, j) - Weighted_Mean[j];
     }
   }
+  arma::mat Weighted_Cov_Matrix(p, p);
+  for (j = 0; j < p; ++j){
+    for (k = 0; k < p; ++k){
+      Weighted_Cov_Matrix(j, k) = 0;
+      for (i = 0; i < n; ++i){
+        Weighted_Cov_Matrix(j, k) = Weighted_Cov_Matrix(j, k) + (Weights[i] * Centered_Data(i, j) * Centered_Data(i, k));
+      }
+    }
+  }
   
   Weighted_Mean = mean((Weights * ones(1,size(Data_original,2))) .* Data_original, 1);
   Centred_Data = Data_original - ones(n,1) * Weighted_Mean;
