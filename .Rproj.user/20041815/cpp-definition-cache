@@ -40,5 +40,20 @@
                 "column": 12
             }
         ]
+    },
+    {
+        "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
+        "file_last_write": 1640202067.0,
+        "definitions": [
+            {
+                "usr": "c:@F@spquantile#I#I#I#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "spquantile(int, int, int, double, int)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
+                "line": 7,
+                "column": 11
+            }
+        ]
     }
 ]
