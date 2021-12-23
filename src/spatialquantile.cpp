@@ -45,14 +45,6 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     }
     return Quantile;
   }
-  
-  // z = Data_original(1,:);
-  // Difference = ones(size(Data_original,1),1) * z - Data_original;
-  // norm_Difference = sqrt(trapz(t_vector, Difference.^2, 2));
-  // if (sum(norm_Difference) == 0){
-  //   Quantile = Data_original;
-  //   return
-  // }
     
   // Dimension reduction for the input data
       
@@ -75,6 +67,20 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     t_3 = t_2;
   }
   double d_n = floor(t_3);
+  
+  arma::vec Weighted_Mean(p);
+  for (j = 0; j < p; ++j){
+    Weighted_Mean[j] = 0;
+    for (i = 0; i < n; ++i){
+      Weighted_Mean[j] = Weighted_Mean[j] + (Weights[i] * Data(i, j));
+    }
+  }
+  arma::mat Centered_Data(n, p);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < p; ++j){
+      Centered_Data(i, j) = Data(i, j) - Weighted_Mean[j];
+    }
+  }
   
   Weighted_Mean = mean((Weights * ones(1,size(Data_original,2))) .* Data_original, 1);
   Centred_Data = Data_original - ones(n,1) * Weighted_Mean;
