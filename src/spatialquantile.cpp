@@ -101,15 +101,27 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     }
   }
   
-  arma::mat Coefficient_Matrix(n, p);
+  arma::mat Eigenvectors_sorted_truncated(p, d_n);
+  for (k = 0; k < d_n; ++k){
+    for (j = 0; j < p; ++k){
+      Eigenvectors_sorted_truncated(j, k) = Eigenvectors_sorted(j, k);
+    }
+  }
+  
+  arma::mat Coefficient_Matrix_truncated(n, d_n);
   for (i = 0; i < n; ++i){
-    for (j = 0; j < p; ++j){
-      Coefficient_Matrix(i, j) = 0;
+    for (j = 0; j < d_n; ++j){
+      Coefficient_Matrix_truncated(i, j) = 0;
       for (k = 0; k < p; ++k){
-        Coefficient_Matrix(i, j) = Coefficient_Matrix(i, j) + (Centered_Data(i, k) * Eigenvectors_sorted(k, j));
+        Coefficient_Matrix_truncated(i, j) = Coefficient_Matrix_truncated(i, j) +
+          (Centered_Data(i, k) * Eigenvectors_sorted_truncated(k, j));
       }
     }
   }
+  
+  arma::mat Data_reduced = Coefficient_Matrix_truncated;
+  
+  
   
   Weighted_Mean = mean((Weights * ones(1,size(Data_original,2))) .* Data_original, 1);
   Centred_Data = Data_original - ones(n,1) * Weighted_Mean;
