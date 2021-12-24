@@ -135,4 +135,30 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   }          // Look here if error handling can be implemented
   
   // Checking whether the weighted quantile is present in the data itself
+  
+  int Check = 0;
+  for i=1:n
+    X = Data;
+  x = X(i,:);
+  U = X - ones(size(X,1),1) * x;
+  weights_for_i = Weights;
+  
+  weighted_norms_U = weights_for_i .* sqrt(sum(U.^2,2));
+  all_indices_for_i = 1:n;
+  J_i = all_indices_for_i(weighted_norms_U == 0);
+  J_i_complement = setdiff(all_indices_for_i, J_i);
+  J_i = setdiff(J_i, i);
+  
+  U_new = U(J_i_complement,:);
+  U_new = U_new ./ ( sqrt(sum(U_new.^2,2)) * ones(1,size(U_new,2)) );
+  weights_proper = weights_for_i(J_i_complement);
+  V = sum((weights_proper * ones(1,size(U_new,2))) .* U_new, 1) +...
+    sum(weights_proper) * u;
+  
+  if sqrt(sum(V.^2)) <= (1 + sqrt(sum(u.^2))) * (sum(weights_for_i(J_i)))
+    Quantile_coefficients = x;
+  Check = 1;
+  break
+    end
+    end
 }
