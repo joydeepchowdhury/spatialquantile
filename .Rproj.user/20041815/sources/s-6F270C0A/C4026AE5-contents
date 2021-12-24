@@ -181,11 +181,22 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     
     arma::mat U_new(n - count_weighted_norms_i, d_n);
     arma::vec weights_proper(n - count_weighted_norms_i);
+    double sum_weights_proper = 0;
     for (k = 0; k < n - count_weighted_norms_i; ++k){
       for (j = 0; j < d_n; ++j){
         U_new(k, j) = U(J_i_complement[k], j) / norms_U[J_i_complement[k]];
       }
       weights_proper[k] = weights_for_i[J_i_complement[k]];
+      
+      sum_weights_proper = sum_weights_proper + weights_proper[k];
+    }
+    arma::vec V(d_n);
+    for (j = 0; j < d_n; ++j){
+      V[j] = 0;
+      for (k = 0; k < n - count_weighted_norms_i; ++k){
+        V[j] = V[j] + (weights_proper[k] * U_new(k, j));
+      }
+      V[j] = V[j] + (sum_weights_proper * u[j]);
     }
     
     
