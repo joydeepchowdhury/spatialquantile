@@ -136,10 +136,10 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   
   // Checking whether the weighted quantile is present in the data itself
   
-  int Check = 0;
+  int Check = 0, count_weighted_norms_i = 0;
   arma::vec x(p);
   arma::mat U(n, p);
-  arma::vec weights_for_i(n), norms_U(n), weighted_norms_U(n);
+  arma::vec weights_for_i(n), norms_U(n), weighted_norms_U(n), J_i_tally(n);
   for (i = 0; i < n; ++i){
     for (j = 0; j < p; ++j){
       x[j] = Data(i, j);
@@ -157,6 +157,26 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       weights_for_i[k] = Weights[k];
       
       weighted_norms_U[k] = weights_for_i[k] * norms_U[k];
+      if (weighted_norms_U[k] == 0){
+        count_weighted_norms_i = count_weighted_norms_i + 1;
+        J_i_tally[k] = 0;
+      }else{
+        J_i_tally[k] = 1;
+      }
+    }
+    
+    arma::vec J_i(count_weighted_norms_i - 1), J_i_complement(n - count_weighted_norms_i);
+    int J_i_index = 0, J_i_complement_index = 0;
+    for (k = 0; k < n; ++k){
+      if (J_i_tally[k] == 0){
+        if (k != i){
+          J_i[J_i_index] = k;
+          J_i_index = J_i_index + 1;
+        }
+      }else{
+        J_i_complement[J_i_complement_index] = k;
+        J_i_complement_index = J_i_complement_index + 1;
+      }
     }
     
     
