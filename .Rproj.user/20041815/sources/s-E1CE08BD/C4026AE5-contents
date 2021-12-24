@@ -121,7 +121,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   
   arma::mat Data_reduced = Coefficient_Matrix_truncated;
   
-  arma::mat Data = Data_reduced;
+  Data = Data_reduced;
   
   arma::vec u(d_n);
   for (j = 0; j < d_n; ++j){
@@ -137,6 +137,24 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   // Checking whether the weighted quantile is present in the data itself
   
   int Check = 0;
+  arma::vec x(p);
+  arma::mat U(n, p);
+  arma::vec weights_for_i(n), weighted_norms_U(n);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < p; ++j){
+      x[j] = Data(i, j);
+    }
+    
+    for (k = 0; k < n; ++k){
+      for (j = 0; j < p; ++j){
+        U(k, j) = Data(k, j) - x[j];
+      }
+      
+      weights_for_i[k] = Weights[k];
+    }
+    
+    
+  }
   for i=1:n
     X = Data;
   x = X(i,:);
