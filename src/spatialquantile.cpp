@@ -139,19 +139,27 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   int Check = 0;
   arma::vec x(p);
   arma::mat U(n, p);
-  arma::vec weights_for_i(n), weighted_norms_U(n);
+  arma::vec weights_for_i(n), norms_U(n), weighted_norms_U(n);
   for (i = 0; i < n; ++i){
     for (j = 0; j < p; ++j){
       x[j] = Data(i, j);
     }
     
     for (k = 0; k < n; ++k){
+      norms_U[k] = 0;
       for (j = 0; j < p; ++j){
         U(k, j) = Data(k, j) - x[j];
+        
+        norms_U[k] = norms_U[k] + pow(U(k, j), 2);
       }
+      norms_U[k] = sqrt(norms_U[k]);
       
       weights_for_i[k] = Weights[k];
+      
+      weighted_norms_U[k] = weights_for_i[k] * norms_U[k];
     }
+    
+    
     
     
   }
