@@ -134,6 +134,8 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     u[d_n - 1] = c;
   }          // Look here if error handling can be implemented
   
+  arma::vec Quantile_coefficients(d_n);
+  
   // Checking whether the weighted quantile is present in the data itself
   
   int Check = 0, count_weighted_norms_i = 0;
@@ -199,33 +201,30 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       V[j] = V[j] + (sum_weights_proper * u[j]);
     }
     
+    double sum_weights_for_i_J_i = 0;
+    for (k = 0; k < count_weighted_norms_i - 1; ++k){
+      sum_weights_for_i_J_i = sum_weights_for_i_J_i + weights_for_i[J_i[k]];
+    }
     
+    double norm_V = 0; norm_u = 0;
+    for (j = 0; j < d_n; ++j){
+      norm_V = norm_V + pow(V[j], 2);
+      norm_u = norm_u + pow(u[j], 2);
+    }
+    norm_V = sqrt(norm_V);
+    norm_u = sqrt(norm_u);
     
-    
-    
+    if (norm_V <= (1 + norm_u) * sum_weights_for_i_J_i){
+      for (j = 0; j < d_n; ++j){
+        Quantile_coefficients[j] = x[j];
+      }
+      Check = 1;
+      break
+    }
   }
-  for i=1:n
-    X = Data;
-  x = X(i,:);
-  U = X - ones(size(X,1),1) * x;
-  weights_for_i = Weights;
   
-  weighted_norms_U = weights_for_i .* sqrt(sum(U.^2,2));
-  all_indices_for_i = 1:n;
-  J_i = all_indices_for_i(weighted_norms_U == 0);
-  J_i_complement = setdiff(all_indices_for_i, J_i);
-  J_i = setdiff(J_i, i);
+  // Checking whether the data lie on a straight line, and computing the quantile in that case
   
-  U_new = U(J_i_complement,:);
-  U_new = U_new ./ ( sqrt(sum(U_new.^2,2)) * ones(1,size(U_new,2)) );
-  weights_proper = weights_for_i(J_i_complement);
-  V = sum((weights_proper * ones(1,size(U_new,2))) .* U_new, 1) +...
-    sum(weights_proper) * u;
   
-  if sqrt(sum(V.^2)) <= (1 + sqrt(sum(u.^2))) * (sum(weights_for_i(J_i)))
-    Quantile_coefficients = x;
-  Check = 1;
-  break
-    end
-    end
+  
 }
