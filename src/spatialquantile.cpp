@@ -244,8 +244,16 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     }
   }
   
-    Check_if_linear = zeros(1,n);
+  Check_if_linear = zeros(1,n);
   s = zeros(1,n);
+  for i=1:n
+    z = Data(i,:);
+  s_vector = (z - x) ./ direction_vector;
+  if length(unique(s_vector)) == 1
+  Check_if_linear(i) = 1;
+  s(i) = unique(s_vector);
+  end
+    end
   
   
   
