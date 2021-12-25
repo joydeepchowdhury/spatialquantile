@@ -246,7 +246,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   
   arma::vec Check_if_linear(n);
   arma::vec s(n), s_vector(d_n);
-  arma::vec z(d_n);= zeros(1,n);
+  arma::vec z(d_n);
   bool Check_uniqueness;
   for (i = 0; i < n; ++i){
     for (j = 0; j < d_n; ++j){
@@ -268,6 +268,22 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       s[i] = 0;
     }
   }
+  
+  if sum(Check_if_linear) == n
+    projected_u = (u * direction_vector') / sqrt(sum(direction_vector.^2));
+  alpha = (projected_u + 1) / 2;
+  
+  [s_sorted, s_sorted_index] = sort(s,'ascend');
+  weights_sorted_index = Weights(s_sorted_index);
+  cumulative_weights_sorted_index = cumsum(weights_sorted_index);
+  index_weighted_quantile = find(cumulative_weights_sorted_index >= alpha, 1);
+  s_weighted_quantile = s_sorted(index_weighted_quantile);
+  
+  Quantile_coefficients = x + (s_weighted_quantile * direction_vector);
+  Check = 1;
+  end
+    
+    %% Iteration procedure when the weighted quantile is not present in the data, or the data is not linear
   
   
   
