@@ -225,6 +225,20 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   
   // Checking whether the data lie on a straight line, and computing the quantile in that case
   
+  for (j = 0; j < d_n; ++j){
+    x[j] = Data(1, j);
+  }
+  x = Data(1,:);
+  for i=2:n
+    y = Data(i,:);
+  direction_vector = y - x;
+  if sqrt(sum(direction_vector.^2)) > 0
+  break
+    end
+    end
+    Check_if_linear = zeros(1,n);
+  s = zeros(1,n);
+  
   
   
 }
