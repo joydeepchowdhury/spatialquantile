@@ -228,14 +228,22 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   for (j = 0; j < d_n; ++j){
     x[j] = Data(1, j);
   }
-  x = Data(1,:);
-  for i=2:n
-    y = Data(i,:);
-  direction_vector = y - x;
-  if sqrt(sum(direction_vector.^2)) > 0
-  break
-    end
-    end
+  
+  arma::vec direction_vector(d_n);
+  double norm_direction_vector;
+  for (i = 1; i < n; ++i){
+    norm_direction_vector = 0;
+    for (j = 0; j < d_n; ++j){
+      direction_vector[j] = Data(i, j) - x[j];
+      norm_direction_vector = norm_direction_vector + pow(direction_vector[j], 2);
+    }
+    norm_direction_vector = sqrt(norm_direction_vector);
+    
+    if (norm_direction_vector > 0){
+      break;
+    }
+  }
+  
     Check_if_linear = zeros(1,n);
   s = zeros(1,n);
   
