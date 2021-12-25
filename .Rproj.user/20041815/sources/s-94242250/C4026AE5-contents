@@ -244,10 +244,10 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     }
   }
   
-  arma::vec Check_if_linear(n);
   arma::vec s(n), s_vector(d_n);
   arma::vec z(d_n);
   bool Check_uniqueness;
+  int sum_Check_if_linear = 0;
   for (i = 0; i < n; ++i){
     for (j = 0; j < d_n; ++j){
       s_vector[j] = (Data(i, j) - x[j]) / direction_vector[j];
@@ -261,15 +261,25 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       }
     }
     if (Check_uniqueness){
-      Check_if_linear[i] = 1;
+      sum_Check_if_linear = sum_Check_if_linear + 1;
       s[i] = s_vector[0];
     }else{
-      Check_if_linear[i] = 0;
       s[i] = 0;
     }
   }
   
-  if sum(Check_if_linear) == n
+  if (sum_Check_if_linear == n){
+    double projected_u = 0;
+    for (j = 0; j < d_n; ++j){
+      projected_u = projected_u + (u[j] * direction_vector[j]);
+    }
+    projected_u = projected_u / norm_direction_vector;
+    
+    double alpha = (projected_u + 1) / 2;
+  }
+  
+  
+  
     projected_u = (u * direction_vector') / sqrt(sum(direction_vector.^2));
   alpha = (projected_u + 1) / 2;
   
