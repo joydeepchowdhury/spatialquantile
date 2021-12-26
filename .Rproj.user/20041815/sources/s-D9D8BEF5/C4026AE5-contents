@@ -324,7 +324,26 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     arma::vec weights_sorted_index(n), cumulative_weights_sorted_index(n);
     int index_weighted_quantile = -1;
     for (j = 0; j < d_n; ++j){
+      for (i = 0; i < n; ++i){
+        vector_concerned[i] = X(i, j);
+      }
       
+      arma::uvec vector_concerned_sorted_index = arma::sort_index(vector_concerned, "ascend");
+      for (i = 0; i < n; ++i){
+        vector_concerned_sorted[i] = vector_concerned[vector_concerned_sorted_index[i]];
+        weights_sorted_index[i] = Weights[vector_concerned_sorted_index[i]];
+        
+        cumulative_weights_sorted_index[i] = weights_sorted_index[i];
+        if (i > 0){
+          cumulative_weights_sorted_index[i] = cumulative_weights_sorted_index[i] + cumulative_weights_sorted_index[i - 1];
+        }
+        
+        if (cumulative_weights_sorted_index[i] >= (u[j] + 1) / 2 && index_weighted_quantile == -1){
+          index_weighted_quantile = i;
+        }
+      }
+      
+      Q_1[j] = vector_concerned_sorted[index_weighted_quantile];
     }
     
     
