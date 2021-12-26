@@ -276,6 +276,19 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     projected_u = projected_u / norm_direction_vector;
     
     double alpha = (projected_u + 1) / 2;
+    
+    arma::uvec s_sorted_index = arma::sort_index(s, "ascend");
+    arma::vec s_sorted(n);
+    for (i = 0; i < n; ++i){
+      s_sorted[i] = s[s_sorted_index[i]];
+    }
+    
+    arma::vec weights_sorted_index(n);
+    for (i = 0; i < n; ++i){
+      weights_sorted_index[i] = Weights[s_sorted_index[i]];
+    }
+    
+    
   }
   
   
