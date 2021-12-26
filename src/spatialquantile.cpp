@@ -312,7 +312,21 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   // Iteration procedure when the weighted quantile is not present in the data, or the data is not linear
   
   if (Check == 0){
-    X = Data;
+    arma::mat X(n, d_n);
+    for (i = 0; i < n; ++i){
+      for (j = 0; j < d_n; ++j){
+        X(i, j) = Data(i, j);
+      }
+    }
+    
+    arma::vec Q_1(d_n);
+    arma::vec vector_concerned(n), vector_concerned_sorted(n);
+    arma::vec weights_sorted_index(n), cumulative_weights_sorted_index(n);
+    int index_weighted_quantile = -1;
+    for (j = 0; j < d_n; ++j){
+      
+    }
+    
     
     Q_1 = zeros(1,size(X,2));
     for i=1:length(u)
