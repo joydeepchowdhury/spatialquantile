@@ -302,7 +302,14 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     
     double s_weighted_quantile = s_sorted[index_weighted_quantile];
     
+    arma::vec Quantile_coefficients(d_n);
+    for (j = 0; j < d_n; ++j){
+      Quantile_coefficients[j] = x[j] + (s_weighted_quantile * direction_vector[j]);
+    }
+    Check = 1;
   }
+  
+  // Iteration procedure when the weighted quantile is not present in the data, or the data is not linear
   
   
   
