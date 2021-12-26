@@ -346,19 +346,30 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       Q_1[j] = vector_concerned_sorted[index_weighted_quantile];
     }
     
+    arma::vec Q_best_till_now(d_n);
+    for (j = 0; j < d_n; ++j){
+      Q_best_till_now[j] = Q_1[j];
+    }
     
-    Q_1 = zeros(1,size(X,2));
-    for i=1:length(u)
-      vector_concerned = X(:,i);
-    [vector_concerned_sorted, vector_concerned_sorted_index] = sort(vector_concerned,'ascend');
-    weights_sorted_index = Weights(vector_concerned_sorted_index);
-    cumulative_weights_sorted_index = cumsum(weights_sorted_index);
-    index_weighted_quantile = find(cumulative_weights_sorted_index >= (u(i)+1)/2, 1);
-    Q_1(i) = vector_concerned_sorted(index_weighted_quantile);
+    double g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
+    
+    
+    
+    Phi = zeros(size(X,2), size(X,2));
+    for i=1:n
+      t1 = X(i,:) - Q_1;
+    if sqrt(sum(t1.^2)) > 0
+    Phi = Phi + Weights(i) * ...
+      (( eye(size(X,2)) - ((t1' * t1) / sum(t1.^2)) ) / sqrt(sum(t1.^2)));
     end
-      Q_best_till_now = Q_1;
-    g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
+      end
+      %     if cond(Phi) >= 10
+      %         warning('Bad initial value, final output may not be good estimate.')
+      %     end
+      
+    
   }
+  
   
   
   
