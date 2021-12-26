@@ -311,22 +311,22 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   
   // Iteration procedure when the weighted quantile is not present in the data, or the data is not linear
   
-  
-  
-    projected_u = (u * direction_vector') / sqrt(sum(direction_vector.^2));
-  alpha = (projected_u + 1) / 2;
-  
-  [s_sorted, s_sorted_index] = sort(s,'ascend');
-  weights_sorted_index = Weights(s_sorted_index);
-  cumulative_weights_sorted_index = cumsum(weights_sorted_index);
-  index_weighted_quantile = find(cumulative_weights_sorted_index >= alpha, 1);
-  s_weighted_quantile = s_sorted(index_weighted_quantile);
-  
-  Quantile_coefficients = x + (s_weighted_quantile * direction_vector);
-  Check = 1;
-  end
+  if (Check == 0){
+    X = Data;
     
-    %% Iteration procedure when the weighted quantile is not present in the data, or the data is not linear
+    Q_1 = zeros(1,size(X,2));
+    for i=1:length(u)
+      vector_concerned = X(:,i);
+    [vector_concerned_sorted, vector_concerned_sorted_index] = sort(vector_concerned,'ascend');
+    weights_sorted_index = Weights(vector_concerned_sorted_index);
+    cumulative_weights_sorted_index = cumsum(weights_sorted_index);
+    index_weighted_quantile = find(cumulative_weights_sorted_index >= (u(i)+1)/2, 1);
+    Q_1(i) = vector_concerned_sorted(index_weighted_quantile);
+    end
+      Q_best_till_now = Q_1;
+    g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
+  }
+  
   
   
   
