@@ -379,7 +379,17 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     double Threshold = 0.001;
     int iteration_number = 1;
     int maximum_iteration_number = 10000;
+    arma::vec Delta(d_n);
     while (iteration_number <= maximum_iteration_number){
+      for (i = 0; i < n; ++i){
+        for (j = 0; j < d_n; ++j){
+          X(i, j) = Data(i, j);
+        }
+      }
+      
+      arma::vec Delta(d_n);
+      
+      
       X = Data;
       Delta = zeros(1,size(X,2));
       Phi = zeros(size(X,2), size(X,2));
