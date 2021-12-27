@@ -376,6 +376,11 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       }
     }
     
+    double sum_Weights = 0;
+    for (i = 0; i < n; ++i){
+      sum_Weights = sum_Weights + Weights[i];
+    }
+    
     double Threshold = 0.001;
     int iteration_number = 1;
     int maximum_iteration_number = 10000;
@@ -384,6 +389,13 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       for (i = 0; i < n; ++i){
         for (j = 0; j < d_n; ++j){
           X(i, j) = Data(i, j);
+        }
+      }
+      
+      for (j = 0; j < d_n; ++j){
+        Delta[j] = 0;
+        for (k = 0; k < d_n; ++k){
+          Phi(j, k) = 0;
         }
       }
       
@@ -397,9 +409,8 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         
         if (norm_sq_t1 > 0){
           for (j = 0; j < d_n; ++j){
-            
+            Delta[j] = Delta[j] + (Weights[i] * (t1[j] / sqrt(norm_sq_t1)));
             for (k = 0; k < d_n; ++k){
-              Phi(j, k) = 0;
               for (l = 0; l < d_n; ++l){
                 Phi(j, k) = Phi(j, k) + (Weights[i] * (((double)(j == k) - ((t1[j] * t1[k]) / norm_sq_t1)) / sqrt(norm_sq_t1)));
               }
@@ -408,22 +419,19 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         }
       }
       
+      for (j = 0; j < d_n; ++j){
+        Delta[j] = Delta[j] + (sum_Weights * u[j]);
+      }
+      
+      arma::vec Q_2 = arma::solve(Phi, Delta);
+      for (j = 0; j < d_n; ++j){
+        Q_2[j] = Q_1[j] + Q_2[j];
+      }
       
       
       
-      X = Data;
-      Delta = zeros(1,size(X,2));
-      Phi = zeros(size(X,2), size(X,2));
-      for i=1:n
-        t1 = X(i,:) - Q_1;
-      if sqrt(sum(t1.^2)) > 0
-      Delta = Delta + Weights(i) * (t1 / sqrt(sum(t1.^2)));
-      Phi = Phi + Weights(i) * ...
-        (( eye(size(X,2)) - ((t1' * t1) / sum(t1.^2)) ) / sqrt(sum(t1.^2)));
-      end
-        end
-        Delta = Delta + (sum(Weights) * u);
-      Q_2 = Q_1 + (Phi \ (Delta'))';
+      
+      
       
     }
     
