@@ -353,9 +353,21 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     
     double g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
     
-    
-    
-    Phi = zeros(size(X,2), size(X,2));
+    arma::mat Phi(d_n, d_n); = zeros(size(X,2), size(X,2));
+    arma::vec t1(d_n);
+    double norm_sq_t1;
+    for (i = 0; i < n; ++i){
+      norm_sq_t1 = 0;
+      for (j = 0; j < d_n; ++j){
+        t1[j] = X(i, j) - Q_1[j];
+        
+        norm_sq_t1 = norm_sq_t1 + pow(t1[j], 2);
+      }
+      
+      if (norm_sq_t1 > 0){
+        
+      }
+    }
     for i=1:n
       t1 = X(i,:) - Q_1;
     if sqrt(sum(t1.^2)) > 0
