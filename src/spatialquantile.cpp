@@ -375,16 +375,11 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         }
       }
     }
-    for i=1:n
-      t1 = X(i,:) - Q_1;
-    if sqrt(sum(t1.^2)) > 0
-    Phi = Phi + Weights(i) * ...
-      (( eye(size(X,2)) - ((t1' * t1) / sum(t1.^2)) ) / sqrt(sum(t1.^2)));
-    end
-      end
-      %     if cond(Phi) >= 10
-      %         warning('Bad initial value, final output may not be good estimate.')
-      %     end
+    
+    double Threshold = 0.001;
+    int iteration_number = 1;
+    int maximum_iteration_number = 10000;
+    
       
     
   }
