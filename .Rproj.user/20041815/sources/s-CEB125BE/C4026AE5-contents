@@ -437,7 +437,15 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       }
       difference_relative = sqrt(difference_relative) / max(sqrt(norm_sq_Q_1), sqrt(norm_sq_Q_2));
       
-      
+      if (difference_relative < Threshold){
+        for (j = 0; j < d_n; ++j){
+          Quantile_coefficients[j] = Q_2[j];
+        }
+        Check = 1;
+        break
+      }else{
+        
+      }
       
       
       
