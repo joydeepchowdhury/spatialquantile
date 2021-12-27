@@ -365,7 +365,14 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       }
       
       if (norm_sq_t1 > 0){
-        
+        for (j = 0; j < d_n; ++j){
+          for (k = 0; k < d_n; ++k){
+            Phi(j, k) = 0;
+            for (l = 0; l < d_n; ++l){
+              Phi(j, k) = Phi(j, k) + (Weights[i] * (((double)(j == k) - ((t1[j] * t1[k]) / norm_sq_t1)) / sqrt(norm_sq_t1)));
+            }
+          }
+        }
       }
     }
     for i=1:n
