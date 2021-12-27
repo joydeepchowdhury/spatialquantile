@@ -428,6 +428,17 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         Q_2[j] = Q_1[j] + Q_2[j];
       }
       
+      double norm_sq_Q_1 = 0, norm_sq_Q_2 = 0, difference_relative = 0;
+      for (j = 0; j < d_n; ++j){
+        norm_sq_Q_1 = norm_sq_Q_1 + pow(Q_1[j], 2);
+        norm_sq_Q_2 = norm_sq_Q_2 + pow(Q_2[j], 2);
+        
+        difference_relative = difference_relative + pow((Q_2[j] - Q_1[j]), 2);
+      }
+      difference_relative = sqrt(difference_relative) / max(sqrt(norm_sq_Q_1), sqrt(norm_sq_Q_2));
+      
+      
+      
       
       
       
