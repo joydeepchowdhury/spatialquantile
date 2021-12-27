@@ -447,11 +447,16 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         double g_at_Q_1 = g_function_weighted(Data, Q_1, Weights, u);
         double g_at_Q_2 = g_function_weighted(Data, Q_2, Weights, u);
         
-        if g_at_Q_2 <= g_at_Q_1
-          if g_at_Q_2 <= g_best_till_now
-            Q_best_till_now = Q_2;
-          g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
-          end
+        if (g_at_Q_2 <= g_at_Q_1){
+          if (g_at_Q_2 <= g_best_till_now){
+            arma::vec Q_best_till_now(d_n);
+            for (j = 0; j < d_n; ++j){
+              Q_best_till_now[j] = Q_2[j];
+            }
+            double g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
+          }
+        }else{}
+          
             else
               Q_2 = (g_at_Q_2 * Q_1 + g_at_Q_1 * Q_2) / (g_at_Q_1 + g_at_Q_2);
             g_at_Q_2 = g_function_weighted(Data, Q_2, Weights, u);
