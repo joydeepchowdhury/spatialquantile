@@ -473,6 +473,12 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         arma::vec t2(d_n);
         double norm_sq_t2;
         while (true){
+          for (j = 0; j < d_n; ++j){
+            for (k = 0; k < d_n; ++k){
+              Phi_temp(j, k) = 0;
+            }
+          }
+          
           for (i = 0; i < n; ++i){
             norm_sq_t2 = 0;
             for (j = 0; j < d_n; ++j){
@@ -484,10 +490,8 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
             if (norm_sq_t2 > 0){
               for (j = 0; j < d_n; ++j){
                 for (k = 0; k < d_n; ++k){
-                  Phi_temp(j, k) = 0;
-                  for (l = 0; l < d_n; ++l){
-                    Phi_temp(j, k) = Phi_temp(j, k) + (Weights[i] * (((double)(j == k))))
-                  }
+                  Phi_temp(j, k) = Phi_temp(j, k) +
+                    (Weights[i] * (((double)(j == k) - ((t2[j] * t2[k]) / norm_sq_t2)) / sqrt(norm_sq_t2)));
                 }
               }
             }
