@@ -470,8 +470,16 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         
         int iteration_counter = 1;
         arma::mat Phi_temp(d_n, d_n);
+        arma::vec t2(d_n);
+        double norm_sq_t2;
         while (true){
           for (i = 0; i < n; ++i){
+            norm_sq_t2 = 0;
+            for (j = 0; j < d_n; ++j){
+              t2[j] = X(i, j) - Q_2[j];
+              
+              norm_sq_t2 = norm_sq_t2 + pow(t2[j], 2);
+            }
             
           }
           
