@@ -469,7 +469,16 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         }
         
         int iteration_counter = 1;
+        arma::mat Phi_temp(d_n, d_n);
         while (true){
+          for (i = 0; i < n; ++i){
+            
+          }
+          
+          
+          
+          
+          
           Phi_temp = zeros(size(X,2), size(X,2));
           for i=1:n
             t2 = X(i,:) - Q_2;
