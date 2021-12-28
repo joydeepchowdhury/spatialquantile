@@ -442,7 +442,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
           Quantile_coefficients[j] = Q_2[j];
         }
         Check = 1;
-        break
+        break;
       }else{
         double g_at_Q_1 = g_function_weighted(Data, Q_1, Weights, u);
         double g_at_Q_2 = g_function_weighted(Data, Q_2, Weights, u);
@@ -495,38 +495,25 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
                 }
               }
             }
-            
           }
           
-          
-          
-          
-          
-          Phi_temp = zeros(size(X,2), size(X,2));
-          for i=1:n
-            t2 = X(i,:) - Q_2;
-          if sqrt(sum(t2.^2)) > 0
-          Phi_temp = Phi_temp + Weights(i) * ...
-            (( eye(size(X,2)) - ((t2' * t2) / sum(t2.^2)) ) / sqrt(sum(t2.^2)));
-          end
-            end
+          if ((arma::cond(Phi_temp) <= 10) || (iteration_counter > 5)){
+            break;
+          }else{
+            for (j = 0; j < d_n; ++j){
+              Q_2[j] = (Q_1[j] + Q_2[j]) / 2;
+            }
             
-            if (cond(Phi_temp) <= 10) || (iteration_counter > 5)
-              break
-              else
-                Q_2 = (Q_1 + Q_2) / 2;
-              iteration_counter = iteration_counter + 1;
-              end
+            iteration_counter = iteration_counter + 1;
+          }
         }
-          
-            
+        
+        for (j = 0; j < d_n; ++j){
+          Q_1[j] = Q_2[j];
+        }
       }
       
-      
-      
-      
-      
-      
+      iteration_number = iteration_number + 1;
     }
     
       
