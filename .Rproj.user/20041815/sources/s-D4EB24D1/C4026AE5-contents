@@ -353,9 +353,14 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     
     double g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
     
-    arma::mat Phi(d_n, d_n); = zeros(size(X,2), size(X,2));
+    arma::mat Phi(d_n, d_n);
     arma::vec t1(d_n);
     double norm_sq_t1;
+    for (j = 0; j < d_n; ++j){
+      for (k = 0; k < d_n; ++k){
+        Phi(j, k) = 0;
+      }
+    }
     for (i = 0; i < n; ++i){
       norm_sq_t1 = 0;
       for (j = 0; j < d_n; ++j){
@@ -367,10 +372,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       if (norm_sq_t1 > 0){
         for (j = 0; j < d_n; ++j){
           for (k = 0; k < d_n; ++k){
-            Phi(j, k) = 0;
-            for (l = 0; l < d_n; ++l){
-              Phi(j, k) = Phi(j, k) + (Weights[i] * (((double)(j == k) - ((t1[j] * t1[k]) / norm_sq_t1)) / sqrt(norm_sq_t1)));
-            }
+            Phi(j, k) = Phi(j, k) + (Weights[i] * (((double)(j == k) - ((t1[j] * t1[k]) / norm_sq_t1)) / sqrt(norm_sq_t1)));
           }
         }
       }
@@ -411,9 +413,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
           for (j = 0; j < d_n; ++j){
             Delta[j] = Delta[j] + (Weights[i] * (t1[j] / sqrt(norm_sq_t1)));
             for (k = 0; k < d_n; ++k){
-              for (l = 0; l < d_n; ++l){
-                Phi(j, k) = Phi(j, k) + (Weights[i] * (((double)(j == k) - ((t1[j] * t1[k]) / norm_sq_t1)) / sqrt(norm_sq_t1)));
-              }
+              Phi(j, k) = Phi(j, k) + (Weights[i] * (((double)(j == k) - ((t1[j] * t1[k]) / norm_sq_t1)) / sqrt(norm_sq_t1)));
             }
           }
         }
