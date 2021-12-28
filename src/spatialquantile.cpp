@@ -481,6 +481,17 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
               norm_sq_t2 = norm_sq_t2 + pow(t2[j], 2);
             }
             
+            if (norm_sq_t2 > 0){
+              for (j = 0; j < d_n; ++j){
+                for (k = 0; k < d_n; ++k){
+                  Phi_temp(j, k) = 0;
+                  for (l = 0; l < d_n; ++l){
+                    Phi_temp(j, k) = Phi_temp(j, k) + (Weights[i] * (((double)(j == k))))
+                  }
+                }
+              }
+            }
+            
           }
           
           
