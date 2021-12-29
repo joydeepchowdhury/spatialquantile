@@ -4,12 +4,12 @@
 // [[Rcpp::depends(RcppArmadillo)]]
 
 // [[Rcpp::export]]
-function g = g_function_weighted(X_local, Q_local, weights_local, u_local)
+double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weights_local, arma::vec u_local){
+  double g;
   
   g = sum(weights_local .* ( sum(( (ones(size(X_local,1), 1) * Q_local) -...
     X_local ).^2, 2) ).^(1/2), 1) / sum(weights_local) - u_local * Q_local';
-
-end
+}
 
 // [[Rcpp::export]]
 arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, arma::vec t_vector){
