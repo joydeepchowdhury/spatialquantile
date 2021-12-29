@@ -517,13 +517,15 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     }
   }
   
-  if Check == 0
-  Quantile_coefficients = Q_best_till_now;
-  end
-    
-    %% Calculating the weighted quantile
-    
-    Quantile = (Quantile_coefficients * Eigenvectors_sorted_truncated') + Weighted_Mean;
+  if (Check == 0){
+    Quantile_coefficients = Q_best_till_now;
+    end
+      
+      %% Calculating the weighted quantile
+      
+      Quantile = (Quantile_coefficients * Eigenvectors_sorted_truncated') + Weighted_Mean;
+  }
+  
   
   
   
