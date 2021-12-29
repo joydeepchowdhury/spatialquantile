@@ -302,7 +302,6 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     
     double s_weighted_quantile = s_sorted[index_weighted_quantile];
     
-    arma::vec Quantile_coefficients(d_n);
     for (j = 0; j < d_n; ++j){
       Quantile_coefficients[j] = x[j] + (s_weighted_quantile * direction_vector[j]);
     }
@@ -518,8 +517,9 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   }
   
   if (Check == 0){
-    Quantile_coefficients = Q_best_till_now;
-    end
+    for (j = 0; j < d_n; ++j){
+      Quantile_coefficients[j] = Q_best_till_now[j];
+    }
       
       %% Calculating the weighted quantile
       
