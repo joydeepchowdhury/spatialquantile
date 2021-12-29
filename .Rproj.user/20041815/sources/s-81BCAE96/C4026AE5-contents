@@ -520,8 +520,8 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
     for (j = 0; j < d_n; ++j){
       Quantile_coefficients[j] = Q_best_till_now[j];
     }
-      
-      %% Calculating the weighted quantile
+    
+    // Calculating the weighted quantile
       
       Quantile = (Quantile_coefficients * Eigenvectors_sorted_truncated') + Weighted_Mean;
   }
