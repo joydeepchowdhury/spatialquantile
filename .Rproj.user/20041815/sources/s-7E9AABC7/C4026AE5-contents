@@ -21,6 +21,8 @@ double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weigh
     g = g + temp[i];
     
     sum_weights_local = sum_weights_local + weights_local[i];
+    
+    dot_u_local_Q_local = dot_u_local_Q_local + (u_local[i] * Q_local[i]);
   }
   g = g / 
   
