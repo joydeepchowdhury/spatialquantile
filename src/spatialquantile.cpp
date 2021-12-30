@@ -7,6 +7,9 @@
 double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weights_local, arma::vec u_local){
   double g;
   
+  int n = X_local.nrow();
+  int q = X_local.ncol();
+  
   g = sum(weights_local .* ( sum(( (ones(size(X_local,1), 1) * Q_local) -...
     X_local ).^2, 2) ).^(1/2), 1) / sum(weights_local) - u_local * Q_local';
 }
