@@ -10,7 +10,13 @@ double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weigh
   int n = X_local.nrow();
   int d = X_local.ncol();
   
+  int i, j;
   
+  arma::vec temp(n);
+  for (i = 0; i < n; ++i){
+    temp[i] = 0;
+    for (j = 0; j < d; ++j){}
+  }
   
   g = sum(weights_local .* ( sum(( (ones(size(X_local,1), 1) * Q_local) -...
     X_local ).^2, 2) ).^(1/2), 1) / sum(weights_local) - u_local * Q_local';
