@@ -24,10 +24,7 @@ double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weigh
     
     dot_u_local_Q_local = dot_u_local_Q_local + (u_local[i] * Q_local[i]);
   }
-  g = g / 
-  
-  g = sum(weights_local .* ( sum(( (ones(size(X_local,1), 1) * Q_local) -...
-    X_local ).^2, 2) ).^(1/2), 1) / sum(weights_local) - u_local * Q_local';
+  g = (g / sum_weights_local) - dot_u_local_Q_local;
 }
 
 // [[Rcpp::export]]
