@@ -349,6 +349,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   
   // Iteration procedure when the weighted quantile is not present in the data, or the data is not linear
   
+  arma::vec Q_best_till_now(d_n);
   if (Check == 0){
     arma::mat X(n, d_n);
     for (i = 0; i < n; ++i){
@@ -384,7 +385,6 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       Q_1[j] = vector_concerned_sorted[index_weighted_quantile];
     }
     
-    arma::vec Q_best_till_now(d_n);
     for (j = 0; j < d_n; ++j){
       Q_best_till_now[j] = Q_1[j];
     }
@@ -473,7 +473,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         
         difference_relative = difference_relative + pow((Q_2[j] - Q_1[j]), 2);
       }
-      difference_relative = sqrt(difference_relative) / max(sqrt(norm_sq_Q_1), sqrt(norm_sq_Q_2));
+      difference_relative = sqrt(difference_relative) / std::max(sqrt(norm_sq_Q_1), sqrt(norm_sq_Q_2));
       
       if (difference_relative < Threshold){
         for (j = 0; j < d_n; ++j){
