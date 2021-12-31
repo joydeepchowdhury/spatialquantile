@@ -45,8 +45,8 @@ double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weigh
 
 // [[Rcpp::export]]
 arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, arma::vec t_vector){
-  int n = Data.nrow();
-  int p = Data.ncol();
+  int n = Data.n_rows;
+  int p = Data.n_cols;
   arma::vec Quantile(p);
   
   int i, j, k;

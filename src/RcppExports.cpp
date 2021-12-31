@@ -11,6 +11,17 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// timesTwo
+Rcpp::NumericVector timesTwo(Rcpp::NumericVector x);
+RcppExport SEXP _spatialquantile_timesTwo(SEXP xSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type x(xSEXP);
+    rcpp_result_gen = Rcpp::wrap(timesTwo(x));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcpparma_hello_world
 arma::mat rcpparma_hello_world();
 RcppExport SEXP _spatialquantile_rcpparma_hello_world() {
@@ -85,6 +96,7 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_spatialquantile_timesTwo", (DL_FUNC) &_spatialquantile_timesTwo, 1},
     {"_spatialquantile_rcpparma_hello_world", (DL_FUNC) &_spatialquantile_rcpparma_hello_world, 0},
     {"_spatialquantile_rcpparma_outerproduct", (DL_FUNC) &_spatialquantile_rcpparma_outerproduct, 1},
     {"_spatialquantile_rcpparma_innerproduct", (DL_FUNC) &_spatialquantile_rcpparma_innerproduct, 1},
