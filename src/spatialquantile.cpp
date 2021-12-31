@@ -246,7 +246,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
       sum_weights_for_i_J_i = sum_weights_for_i_J_i + weights_for_i[J_i[k]];
     }
     
-    double norm_V = 0; norm_u = 0;
+    double norm_V = 0, norm_u = 0;
     for (j = 0; j < d_n; ++j){
       norm_V = norm_V + pow(V[j], 2);
       norm_u = norm_u + pow(u[j], 2);
