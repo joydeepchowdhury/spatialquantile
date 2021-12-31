@@ -487,7 +487,6 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         
         if (g_at_Q_2 <= g_at_Q_1){
           if (g_at_Q_2 <= g_best_till_now){
-            arma::vec Q_best_till_now(d_n);
             for (j = 0; j < d_n; ++j){
               Q_best_till_now[j] = Q_2[j];
             }
