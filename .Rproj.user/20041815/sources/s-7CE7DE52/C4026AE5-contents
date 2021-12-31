@@ -19,8 +19,8 @@
 
 // [[Rcpp::export]]
 double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weights_local, arma::vec u_local){
-  int n = X_local.nrow();
-  int d = X_local.ncol();
+  int n = X_local.n_rows();
+  int d = X_local.n_cols();
   int i, j;
   
   arma::vec temp(n);
