@@ -54,12 +54,43 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// g_function_weighted
+double g_function_weighted(arma::mat X_local, arma::vec Q_local, arma::vec weights_local, arma::vec u_local);
+RcppExport SEXP _spatialquantile_g_function_weighted(SEXP X_localSEXP, SEXP Q_localSEXP, SEXP weights_localSEXP, SEXP u_localSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type X_local(X_localSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type Q_local(Q_localSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type weights_local(weights_localSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type u_local(u_localSEXP);
+    rcpp_result_gen = Rcpp::wrap(g_function_weighted(X_local, Q_local, weights_local, u_local));
+    return rcpp_result_gen;
+END_RCPP
+}
+// spquantile
+arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, arma::vec t_vector);
+RcppExport SEXP _spatialquantile_spquantile(SEXP DataSEXP, SEXP WeightsSEXP, SEXP u_indexSEXP, SEXP cSEXP, SEXP t_vectorSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type Data(DataSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type Weights(WeightsSEXP);
+    Rcpp::traits::input_parameter< int >::type u_index(u_indexSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t_vector(t_vectorSEXP);
+    rcpp_result_gen = Rcpp::wrap(spquantile(Data, Weights, u_index, c, t_vector));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_spatialquantile_rcpparma_hello_world", (DL_FUNC) &_spatialquantile_rcpparma_hello_world, 0},
     {"_spatialquantile_rcpparma_outerproduct", (DL_FUNC) &_spatialquantile_rcpparma_outerproduct, 1},
     {"_spatialquantile_rcpparma_innerproduct", (DL_FUNC) &_spatialquantile_rcpparma_innerproduct, 1},
     {"_spatialquantile_rcpparma_bothproducts", (DL_FUNC) &_spatialquantile_rcpparma_bothproducts, 1},
+    {"_spatialquantile_g_function_weighted", (DL_FUNC) &_spatialquantile_g_function_weighted, 4},
+    {"_spatialquantile_spquantile", (DL_FUNC) &_spatialquantile_spquantile, 5},
     {NULL, NULL, 0}
 };
 

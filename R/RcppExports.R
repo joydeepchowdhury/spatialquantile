@@ -17,3 +17,11 @@ rcpparma_bothproducts <- function(x) {
     .Call(`_spatialquantile_rcpparma_bothproducts`, x)
 }
 
+g_function_weighted <- function(X_local, Q_local, weights_local, u_local) {
+    .Call(`_spatialquantile_g_function_weighted`, X_local, Q_local, weights_local, u_local)
+}
+
+spquantile <- function(Data, Weights, u_index, c, t_vector) {
+    .Call(`_spatialquantile_spquantile`, Data, Weights, u_index, c, t_vector)
+}
+

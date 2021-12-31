@@ -259,7 +259,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
         Quantile_coefficients[j] = x[j];
       }
       Check = 1;
-      break
+      break;
     }
   }
   
@@ -285,7 +285,6 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
   }
   
   arma::vec s(n), s_vector(d_n);
-  arma::vec z(d_n);
   bool Check_uniqueness;
   int sum_Check_if_linear = 0;
   for (i = 0; i < n; ++i){
@@ -492,7 +491,7 @@ arma::vec spquantile(arma::mat Data, arma::vec Weights, int u_index, double c, a
             for (j = 0; j < d_n; ++j){
               Q_best_till_now[j] = Q_2[j];
             }
-            double g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
+            g_best_till_now = g_function_weighted(Data, Q_best_till_now, Weights, u);
           }
         }else{
           for (j = 0; j < d_n; ++j){
