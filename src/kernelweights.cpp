@@ -19,6 +19,12 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
   
   arma::vec Weights(n);
   
+  Distance_vector = trapz(t_vector, (ones(size(X_static,1),1) * x - X_static).^2, 2);
+  
+  Weights = Kernel(Distance_vector / h);
+  Weights = Weights / sum(Weights);
+  
+  
   
   return x * 2;
 }
