@@ -19,6 +19,22 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
   
   arma::vec Weights(n);
   
+  arma::vec Distance_vector(n);
+  
+  arma::vec norm_difference(n);
+  double temp1;
+  for (i = 0; i < n; ++i){
+    temp1 = 0;
+    for (j = 0; j < (p - 1); ++j){
+      // Integration computed using trapezoidal rule
+      temp1 = temp1 + ((pow(Difference(i, j + 1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
+    }
+    Distance_vector[i] = sqrt(temp1);
+  }
+  
+  
+  
+  
   Distance_vector = trapz(t_vector, (ones(size(X_static,1),1) * x - X_static).^2, 2);
   
   Weights = Kernel(Distance_vector / h);
