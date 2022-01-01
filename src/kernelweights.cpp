@@ -17,16 +17,23 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
   int n = X_static.n_rows;
   int p = X_static.n_cols;
   
+  int i, j;
+  
   arma::vec Weights(n);
   
-  arma::vec Distance_vector(n);
+  arma::mat Difference(n, p);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < p; ++j){
+      Difference(i, j) = x[j] - X_static(i, j);
+    }
+  }
   
-  arma::vec norm_difference(n);
+  arma::vec Distance_vector(n);
   double temp1;
   for (i = 0; i < n; ++i){
     temp1 = 0;
     for (j = 0; j < (p - 1); ++j){
-      // Integration computed using trapezoidal rule
+      // Integration using trapezoidal rule
       temp1 = temp1 + ((pow(Difference(i, j + 1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
     }
     Distance_vector[i] = sqrt(temp1);
