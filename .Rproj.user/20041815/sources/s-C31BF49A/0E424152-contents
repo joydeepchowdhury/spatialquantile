@@ -13,7 +13,13 @@
 // is a positive number which is the bandwidth of the kernel function.
 
 // [[Rcpp::export]]
-arma::vec Weights = kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, double h, char Kernel){
+arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, double h, char Kernel){
+  int n = X_static.n_rows;
+  int p = X_static.n_cols;
+  
+  arma::vec Weights(n);
+  
+  
   return x * 2;
 }
 
