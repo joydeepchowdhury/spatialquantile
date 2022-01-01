@@ -13,7 +13,7 @@
 // is a positive number which is the bandwidth of the kernel function.
 
 // [[Rcpp::export]]
-Rcpp::NumericVector timesTwo(Rcpp::NumericVector x) {
+arma::vec Weights = kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, double h, char Kernel){
   return x * 2;
 }
 
