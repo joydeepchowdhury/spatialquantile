@@ -39,6 +39,16 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
     Distance_vector[i] = sqrt(temp1);
   }
   
+  double sum_Weights = 0;
+  for (i = 0; i < n; ++i){
+    Weights[i] = kernel((Distance_vector[i] / h), Kernel);
+    
+    sum_Weights = sum_Weights + Weights[i];
+  }
+  for (i = 0; i < n; ++i){
+    Weights[i] = Weights[i] / sum_Weights;
+  }
+  
   
   
   
@@ -50,4 +60,11 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
   
   
   return x * 2;
+}
+
+// [[Rcpp::export]]
+double kernel(double u, char Kernel){
+  if (Kernel == "g"){
+    
+  })
 }
