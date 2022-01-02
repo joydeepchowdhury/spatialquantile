@@ -54,7 +54,7 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
 
 // [[Rcpp::export]]
 double kernel(double u, char Kernel){
-  if (Kernel == "g"){
-    
+  if (Kernel == 'g'){
+    return ((1 / sqrt(2 * arma::datum::pi)) * exp(- pow(u, 2) / 2));
   })
 }
