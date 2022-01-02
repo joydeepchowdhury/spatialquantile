@@ -58,10 +58,16 @@ double kernel(double u, char Kernel){
   if (strncmp(Kernel, "gaussian", 20) == 0){
     return ((1 / sqrt(2 * arma::datum::pi)) * exp(- pow(u, 2) / 2));
   }else if (strncmp(Kernel, "triangular", 20) == 0){
-    return (1 - abs(u));
+    return ((1 - abs(u)) * (double)(abs(u) <= 1));
   }else if (strncmp(Kernel, "epanechnikov", 20) == 0){
     return ((3/4) * (1 - pow(u, 2)));
   }else if (strncmp(Kernel, "quartic", 20) == 0){
     return ((15/16) * pow((1 - pow(u, 2)), 2));
+  }else if (strncmp(Kernel, "triweight", 20) == 0){
+    return ((35/32) * pow((1 - pow(u, 2)), 3));
+  }else if (strncmp(Kernel, "tricube", 20) == 0){
+    return ((70/81) * pow((1 - pow(abs(u), 3)), 3));
+  }else{
+    return (0.5 * (double)(abs(u) <= 1));
   }
 }
