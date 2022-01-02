@@ -1,25 +1,25 @@
 [
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-        "file_last_write": 1641045546.0,
+        "file_last_write": 1641130590.0,
         "definitions": [
             {
-                "usr": "c:@F@kernelweights#I#I#I#d#C#",
+                "usr": "c:@F@kernel#d#*C#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "kernelweights(int, int, int, double, char)",
+                "name": "kernel(double, char *)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-                "line": 16,
-                "column": 11
+                "line": 17,
+                "column": 8
             },
             {
-                "usr": "c:@F@kernel#d#C#",
+                "usr": "c:@F@kernelweights#I#I#I#d#*C#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "kernel(double, char)",
+                "name": "kernelweights(int, int, int, double, char *)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-                "line": 66,
-                "column": 8
+                "line": 36,
+                "column": 11
             }
         ]
     },

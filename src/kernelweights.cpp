@@ -14,7 +14,26 @@
 // is a positive number which is the bandwidth of the kernel function.
 
 // [[Rcpp::export]]
-arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, double h, char Kernel){
+double kernel(double u, char *Kernel){
+  if (strncmp(Kernel, "gaussian", 20) == 0){
+    return ((1 / sqrt(2 * arma::datum::pi)) * exp(- pow(u, 2) / 2));
+  }else if (strncmp(Kernel, "triangular", 20) == 0){
+    return ((1 - abs(u)) * (double)(abs(u) <= 1));
+  }else if (strncmp(Kernel, "epanechnikov", 20) == 0){
+    return ((3/4) * (1 - pow(u, 2)) * (double)(abs(u) <= 1));
+  }else if (strncmp(Kernel, "quartic", 20) == 0){
+    return ((15/16) * pow((1 - pow(u, 2)), 2) * (double)(abs(u) <= 1));
+  }else if (strncmp(Kernel, "triweight", 20) == 0){
+    return ((35/32) * pow((1 - pow(u, 2)), 3) * (double)(abs(u) <= 1));
+  }else if (strncmp(Kernel, "tricube", 20) == 0){
+    return ((70/81) * pow((1 - pow(abs(u), 3)), 3) * (double)(abs(u) <= 1));
+  }else{
+    return (0.5 * (double)(abs(u) <= 1));
+  }
+}
+
+// [[Rcpp::export]]
+arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, double h, char *Kernel){
   int n = X_static.n_rows;
   int p = X_static.n_cols;
   
@@ -51,23 +70,4 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
   }
   
   return Weights;
-}
-
-// [[Rcpp::export]]
-double kernel(double u, char Kernel){
-  if (strncmp(Kernel, "gaussian", 20) == 0){
-    return ((1 / sqrt(2 * arma::datum::pi)) * exp(- pow(u, 2) / 2));
-  }else if (strncmp(Kernel, "triangular", 20) == 0){
-    return ((1 - abs(u)) * (double)(abs(u) <= 1));
-  }else if (strncmp(Kernel, "epanechnikov", 20) == 0){
-    return ((3/4) * (1 - pow(u, 2)) * (double)(abs(u) <= 1));
-  }else if (strncmp(Kernel, "quartic", 20) == 0){
-    return ((15/16) * pow((1 - pow(u, 2)), 2) * (double)(abs(u) <= 1));
-  }else if (strncmp(Kernel, "triweight", 20) == 0){
-    return ((35/32) * pow((1 - pow(u, 2)), 3) * (double)(abs(u) <= 1));
-  }else if (strncmp(Kernel, "tricube", 20) == 0){
-    return ((70/81) * pow((1 - pow(abs(u), 3)), 3) * (double)(abs(u) <= 1));
-  }else{
-    return (0.5 * (double)(abs(u) <= 1));
-  }
 }
