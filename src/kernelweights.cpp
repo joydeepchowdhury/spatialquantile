@@ -1,5 +1,6 @@
 # include <RcppArmadillo.h>
 # include <algorithm>
+#include <string.h>
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -54,7 +55,13 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
 
 // [[Rcpp::export]]
 double kernel(double u, char Kernel){
-  if (Kernel == 'g'){
+  if (strncmp(Kernel, "gaussian", 20) == 0){
     return ((1 / sqrt(2 * arma::datum::pi)) * exp(- pow(u, 2) / 2));
-  })
+  }else if (strncmp(Kernel, "triangular", 20) == 0){
+    return (1 - abs(u));
+  }else if (strncmp(Kernel, "epanechnikov", 20) == 0){
+    return ((3/4) * (1 - pow(u, 2)));
+  }else if (strncmp(Kernel, "quartic", 20) == 0){
+    return ((15/16) * pow((1 - pow(u, 2)), 2));
+  }
 }
