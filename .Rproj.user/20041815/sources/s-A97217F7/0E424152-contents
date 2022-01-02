@@ -49,9 +49,7 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
     Weights[i] = Weights[i] / sum_Weights;
   }
   
-  
-  
-  return x * 2;
+  return Weights;
 }
 
 // [[Rcpp::export]]
