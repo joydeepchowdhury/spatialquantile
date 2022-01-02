@@ -60,13 +60,13 @@ double kernel(double u, char Kernel){
   }else if (strncmp(Kernel, "triangular", 20) == 0){
     return ((1 - abs(u)) * (double)(abs(u) <= 1));
   }else if (strncmp(Kernel, "epanechnikov", 20) == 0){
-    return ((3/4) * (1 - pow(u, 2)));
+    return ((3/4) * (1 - pow(u, 2)) * (double)(abs(u) <= 1));
   }else if (strncmp(Kernel, "quartic", 20) == 0){
-    return ((15/16) * pow((1 - pow(u, 2)), 2));
+    return ((15/16) * pow((1 - pow(u, 2)), 2) * (double)(abs(u) <= 1));
   }else if (strncmp(Kernel, "triweight", 20) == 0){
-    return ((35/32) * pow((1 - pow(u, 2)), 3));
+    return ((35/32) * pow((1 - pow(u, 2)), 3) * (double)(abs(u) <= 1));
   }else if (strncmp(Kernel, "tricube", 20) == 0){
-    return ((70/81) * pow((1 - pow(abs(u), 3)), 3));
+    return ((70/81) * pow((1 - pow(abs(u), 3)), 3) * (double)(abs(u) <= 1));
   }else{
     return (0.5 * (double)(abs(u) <= 1));
   }
