@@ -1,7 +1,31 @@
 [
     {
+        "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
+        "file_last_write": 1641219956.0,
+        "definitions": [
+            {
+                "usr": "c:@F@Lp_norm#I#I#d#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "Lp_norm(int, int, double)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
+                "line": 32,
+                "column": 11
+            },
+            {
+                "usr": "c:@F@crossvalidation#I#I#I#I#I#*C#S0_#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "crossvalidation(int, int, int, int, int, char *, char *)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
+                "line": 52,
+                "column": 8
+            }
+        ]
+    },
+    {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-        "file_last_write": 1641130590.0,
+        "file_last_write": 1641217872.0,
         "definitions": [
             {
                 "usr": "c:@F@kernel#d#*C#",
@@ -9,7 +33,7 @@
                 "parent_name": "",
                 "name": "kernel(double, char *)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-                "line": 17,
+                "line": 26,
                 "column": 8
             },
             {
@@ -18,7 +42,7 @@
                 "parent_name": "",
                 "name": "kernelweights(int, int, int, double, char *)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-                "line": 36,
+                "line": 45,
                 "column": 11
             }
         ]
@@ -67,7 +91,7 @@
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
-        "file_last_write": 1640966124.0,
+        "file_last_write": 1641215979.0,
         "definitions": [
             {
                 "usr": "c:@F@g_function_weighted#I#I#I#I#",
@@ -79,10 +103,10 @@
                 "column": 8
             },
             {
-                "usr": "c:@F@spquantile#I#I#I#d#I#",
+                "usr": "c:@F@spatialquantile#I#I#I#d#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "spquantile(int, int, int, double, int)",
+                "name": "spatialquantile(int, int, int, double, int)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
                 "line": 47,
                 "column": 11

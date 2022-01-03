@@ -28,25 +28,25 @@
 //    * `uniform` (default): 0.5 (abs(u) <= 1).
 
 
-arma::vec Lp_norm(arma::vec t_vector_local, arma::mat Data_for_norm, double p_local){
-  int n = Data_for_norm.n_rows;
-  int p = Data_for_norm.n_cols;
-  
-  arma::vec lp_norm(n);
+// [[Rcpp::export]]
+arma::vec Lp_norm(arma::vec t_vector, arma::mat Data, double p){
+  int n = Data.n_rows;
+  int q = Data.n_cols;
   
   int i, j;
   double temp;
+  
+  arma::vec lp_norm(n);
   for (i = 0; i < n; ++i){
     temp = 0;
-    for (j = 0; j < (p - 1); ++j){
-      temp = temp + 
+    for (j = 0; j < (q - 1); ++j){
+      temp = temp + ((pow(abs(Data(i, j + 1)), p) + pow(abs(Data(i, j)), p)) / 2) * (t_vector[j + 1] - t_vector[j]);
     }
+    lp_norm[i] = pow(temp, (1/p));
   }
-}
   
-  lp_norm = (trapz(t_vector_local, abs(Data_for_norm).^p_local, 2)).^(1/p_local);
-
-end
+  return lp_norm;
+}
 
 // [[Rcpp::export]]
 double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
