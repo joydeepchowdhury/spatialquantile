@@ -1,19 +1,26 @@
+# include <RcppArmadillo.h>
+# include <algorithm>
+# include <string.h>
+
+// [[Rcpp::depends(RcppArmadillo)]]
+
+
 function optimum_h_or_neighborhood_size = crossvalidation(t_vector_X, X_static, t_vector_Y, Y_static, method_for_h, type, Kernel)
   
-  % This function calculates the optimum bandwidth or neighborhood size using
-  % cross validation. If method_for_h = 1, it returns the optimum bandwidth,
-  % else it returns the optimum neighborhood size. X_static is the n-by-p
-  % data matrix of n covariate observations, Y_static is the n-by-q data
-  % matrix of the corresponding response observations. Three types of
-  % estimators can be used for cross validations, viz., the weighted
-  % pointwise mean, the weighted pointwise median and the weighted spatial
-  % median. To use the weighted pointwise mean, put type = 'pointwise_mean',
-  % to use the weighted pointwise median, put type = 'pointwise_median', and
-  % to use the weighted spatial median, put type = 'spatial_median'. The
-  % numbers n, p and q must be greater than 1. Kernel is a function handle
-  % representing the kernel function used to calculate the weights. 
-  % t_vector_X and t_vector_Y are the respective grids on which the 
-  % observations in X_static and Y_static are recorded.
+This function calculates the optimum bandwidth or neighborhood size using
+cross validation. If method_for_h = 1, it returns the optimum bandwidth,
+else it returns the optimum neighborhood size. X_static is the n-by-p
+data matrix of n covariate observations, Y_static is the n-by-q data
+matrix of the corresponding response observations. Three types of
+estimators can be used for cross validations, viz., the weighted
+pointwise mean, the weighted pointwise median and the weighted spatial
+median. To use the weighted pointwise mean, put type = 'pointwise_mean',
+to use the weighted pointwise median, put type = 'pointwise_median', and
+to use the weighted spatial median, put type = 'spatial_median'. The
+numbers n, p and q must be greater than 1. Kernel is a function handle
+representing the kernel function used to calculate the weights. 
+t_vector_X and t_vector_Y are the respective grids on which the 
+observations in X_static and Y_static are recorded.
   
   sample_size = size(X_static,1);
   p_covariate = 2;
