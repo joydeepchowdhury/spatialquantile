@@ -10,8 +10,8 @@
 // functional observations recorded at `p` points specified in the vector
 // `t_vector`. The variable `x` is a row vector of length `p`, whose elements
 // are the recorded values of the underlying function at the points in
-// `t_vector`. The argument `Kernel` is a specifies the name of the kernel
-// function, and `h` is a positive number which is the bandwidth of the kernel
+// `t_vector`. The argument `Kernel` specifies the name of the kernel function,
+// and `h` is a positive number which is the bandwidth of the kernel
 // function. The implemented kernel functions are:
 //    * `gaussian`: (1 / sqrt(2 pi)) exp(- u^2 / 2),
 //    * `triangular`: (1 - abs(u)) (abs(u) <= 1),
@@ -20,6 +20,7 @@
 //    * `triweight`: (35/32) ((1 - u^2)^3) (abs(u) <= 1),
 //    * `tricube`: (70/81) (1 - abs(u)^3)^3 (abs(u) <= 1),
 //    * `uniform` (default): 0.5 (abs(u) <= 1).
+
 
 // [[Rcpp::export]]
 double kernel(double u, char *Kernel){

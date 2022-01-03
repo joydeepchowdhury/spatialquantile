@@ -28,7 +28,12 @@
 //    * `uniform` (default): 0.5 (abs(u) <= 1).
 
 
-function optimum_h_or_neighborhood_size = crossvalidation(t_vector_X, X_static, t_vector_Y, Y_static, method_for_h, type, Kernel)
+// [[Rcpp::export]]
+double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
+                       arma::vec t_vector_Y, arma::mat Y_static,
+                       int method_for_h, char *type, char *Kernel){
+  double optimum_h_or_neighborhood_size;
+}
   
 
   

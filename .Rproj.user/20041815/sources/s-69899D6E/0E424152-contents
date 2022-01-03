@@ -21,6 +21,7 @@
 //    * `tricube`: (70/81) (1 - abs(u)^3)^3 (abs(u) <= 1),
 //    * `uniform` (default): 0.5 (abs(u) <= 1).
 
+
 // [[Rcpp::export]]
 double kernel(double u, char *Kernel){
   if (strncmp(Kernel, "gaussian", 20) == 0){
