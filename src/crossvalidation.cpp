@@ -28,7 +28,21 @@
 //    * `uniform` (default): 0.5 (abs(u) <= 1).
 
 
-function lp_norm = Lp_norm(t_vector_local, Data_for_norm, p_local)
+arma::vec Lp_norm(arma::vec t_vector_local, arma::mat Data_for_norm, double p_local){
+  int n = Data_for_norm.n_rows;
+  int p = Data_for_norm.n_cols;
+  
+  arma::vec lp_norm(n);
+  
+  int i, j;
+  double temp;
+  for (i = 0; i < n; ++i){
+    temp = 0;
+    for (j = 0; j < (p - 1); ++j){
+      temp = temp + 
+    }
+  }
+}
   
   lp_norm = (trapz(t_vector_local, abs(Data_for_norm).^p_local, 2)).^(1/p_local);
 
