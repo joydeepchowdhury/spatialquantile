@@ -28,6 +28,12 @@
 //    * `uniform` (default): 0.5 (abs(u) <= 1).
 
 
+function lp_norm = Lp_norm(t_vector_local, Data_for_norm, p_local)
+  
+  lp_norm = (trapz(t_vector_local, abs(Data_for_norm).^p_local, 2)).^(1/p_local);
+
+end
+
 // [[Rcpp::export]]
 double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
                        arma::vec t_vector_Y, arma::mat Y_static,
@@ -201,8 +207,4 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         
         end
         
-        function lp_norm = Lp_norm(t_vector_local, Data_for_norm, p_local)
         
-        lp_norm = (trapz(t_vector_local, abs(Data_for_norm).^p_local, 2)).^(1/p_local);
-      
-      end
