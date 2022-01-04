@@ -29,27 +29,23 @@
 
 
 // [[Rcpp::export]]
-arma::vec Lp_norm(arma::vec t_vector, arma::mat Data, double p){
-  int n = Data.n_rows;
-  int q = Data.n_cols;
+double Lp_norm(arma::vec t_vector, arma::vec X, double p){
+  int q = X.n_elem;
   
   int i, j;
-  double temp;
+  double lp_norm, temp;
   
-  arma::vec lp_norm(n);
-  for (i = 0; i < n; ++i){
-    temp = 0;
-    if (p < arma::datum::inf){
-      for (j = 0; j < (q - 1); ++j){
-        temp = temp + ((pow(abs(Data(i, j + 1)), p) + pow(abs(Data(i, j)), p)) / 2) * (t_vector[j + 1] - t_vector[j]);
-      }
-      lp_norm[i] = pow(temp, (1/p));
-    }else{
-      for (j = 0; j < (q - 1); ++j){
-        temp = max(temp, abs(Data(i, j)));
-      }
-      lp_norm[i] = temp;
+  temp = 0;
+  if (p < arma::datum::inf){
+    for (j = 0; j < (q - 1); ++j){
+      temp = temp + ((pow(abs(X[j + 1]), p) + pow(abs(X[j]), p)) / 2) * (t_vector[j + 1] - t_vector[j]);
     }
+    lp_norm = pow(temp, (1/p));
+  }else{
+    for (j = 0; j < (q - 1); ++j){
+      temp = max(temp, abs(X[j]));
+    }
+    lp_norm = temp;
   }
   
   return lp_norm;
@@ -77,6 +73,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           t1[k] = X_static(i, k);
           t2[k] = X_static(j, k);
         }
+        X_distance(i, j) = Lp_norm(t_vector_X, )
       }
     }
   }
