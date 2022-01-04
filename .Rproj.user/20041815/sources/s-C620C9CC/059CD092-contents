@@ -53,6 +53,14 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
                        arma::vec t_vector_Y, arma::mat Y_static,
                        int method_for_h, char *type, char *Kernel){
   double optimum_h_or_neighborhood_size;
+  
+  int sample_size = X_static.n_rows;
+  int p_covariate = 2, p_response = 2;
+  
+  int i, j, k, l;
+  
+  arma::mat X_distance(sample_size, sample_size);
+  
 }
   
 
