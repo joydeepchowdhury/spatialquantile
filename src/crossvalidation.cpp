@@ -65,6 +65,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   double inf = arma::datum::inf;
   
   arma::mat X_distance(sample_size, sample_size);
+  double min_X_distance = 0, max_X_distance = 0;
   arma::vec t1(q_cov);
   for (i = 0; i < sample_size; ++i){
     for (j = 0; j < sample_size; ++j){
@@ -78,42 +79,15 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }else{
         X_distance(i, j) = X_distance(j, i);
       }
+      min_X_distance = min(min_X_distance, X_distance(i, j));
+      max_X_distance = max(max_X_distance, X_distance(i, j));
     }
   }
+  
+  if (method_for_h == 1){
+    
+  }
 }
-  
-
-  
-  sample_size = size(X_static,1);
-  p_covariate = 2;
-  p_response = 2;
-  
-  X_distance = zeros(sample_size,sample_size);
-  for i=1:1:sample_size
-    for j=1:1:sample_size
-      if i < j
-        t1 = X_static(i,:);
-      t2 = X_static(j,:);
-      if p_covariate < inf
-        d = Lp_norm(t_vector_X, (t1 - t2), p_covariate);
-      else
-        d = max(abs(t1 - t2));
-      end
-        X_distance(i,j) = d;
-      elseif i == j
-        d = 0;
-      X_distance(i,j) = d;
-      else
-        X_distance(i,j) = X_distance(j,i);
-      end
-        end
-        end
-        
-        X_distance_upper_tringular_wo_diag = triu(X_distance,1);
-      X_distance_vector = reshape(X_distance_upper_tringular_wo_diag, 1, (sample_size * sample_size));
-      X_distance_vector_sorted = sort(X_distance_vector,'ascend');
-      X_distance_vector_sorted_positive = X_distance_vector_sorted(X_distance_vector_sorted > 0);
-      X_distance_limits = [X_distance_vector_sorted_positive(1), X_distance_vector_sorted_positive(end)];
       
       if method_for_h == 1
       h_vector = linspace(X_distance_limits(1), X_distance_limits(2),100);
