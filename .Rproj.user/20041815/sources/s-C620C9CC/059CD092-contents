@@ -55,12 +55,24 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   double optimum_h_or_neighborhood_size;
   
   int sample_size = X_static.n_rows;
+  int q_cov = X_static.n_cols, q_res = Y_static.n_cols;
   int p_covariate = 2, p_response = 2;
   
   int i, j, k, l;
+  double inf = arma::datum::inf;
   
   arma::mat X_distance(sample_size, sample_size);
-  
+  arma::vec t1(q_cov), t2(q_cov);
+  for (i = 0; i < sample_size; ++i){
+    for (j = 0; j < sample_size; ++j){
+      if (i < j){
+        for (k = 0; k < q_cov; ++k){
+          t1[k] = X_static(i, k);
+          t2[k] = X_static(j, k);
+        }
+      }
+    }
+  }
 }
   
 
