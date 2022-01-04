@@ -39,10 +39,17 @@ arma::vec Lp_norm(arma::vec t_vector, arma::mat Data, double p){
   arma::vec lp_norm(n);
   for (i = 0; i < n; ++i){
     temp = 0;
-    for (j = 0; j < (q - 1); ++j){
-      temp = temp + ((pow(abs(Data(i, j + 1)), p) + pow(abs(Data(i, j)), p)) / 2) * (t_vector[j + 1] - t_vector[j]);
+    if (p < arma::datum::inf){
+      for (j = 0; j < (q - 1); ++j){
+        temp = temp + ((pow(abs(Data(i, j + 1)), p) + pow(abs(Data(i, j)), p)) / 2) * (t_vector[j + 1] - t_vector[j]);
+      }
+      lp_norm[i] = pow(temp, (1/p));
+    }else{
+      for (j = 0; j < (q - 1); ++j){
+        temp = max(temp, abs(Data(i, j)));
+      }
+      lp_norm[i] = temp;
     }
-    lp_norm[i] = pow(temp, (1/p));
   }
   
   return lp_norm;
