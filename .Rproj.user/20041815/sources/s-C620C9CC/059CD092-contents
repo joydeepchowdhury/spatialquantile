@@ -65,15 +65,18 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   double inf = arma::datum::inf;
   
   arma::mat X_distance(sample_size, sample_size);
-  arma::vec t1(q_cov), t2(q_cov);
+  arma::vec t1(q_cov);
   for (i = 0; i < sample_size; ++i){
     for (j = 0; j < sample_size; ++j){
       if (i < j){
         for (k = 0; k < q_cov; ++k){
-          t1[k] = X_static(i, k);
-          t2[k] = X_static(j, k);
+          t1[k] = X_static(i, k) - X_static(j, k);
         }
-        X_distance(i, j) = Lp_norm(t_vector_X, )
+        X_distance(i, j) = Lp_norm(t_vector_X, t1, p_covariate);
+      }else if (i == j){
+        X_distance(i, j) = 0;
+      }else{
+        X_distance(i, j) = X_distance(j, i);
       }
     }
   }
