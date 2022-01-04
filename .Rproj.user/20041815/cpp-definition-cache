@@ -1,7 +1,7 @@
 [
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-        "file_last_write": 1641219956.0,
+        "file_last_write": 1641289562.0,
         "definitions": [
             {
                 "usr": "c:@F@Lp_norm#I#I#d#",
@@ -10,7 +10,7 @@
                 "name": "Lp_norm(int, int, double)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
                 "line": 32,
-                "column": 11
+                "column": 8
             },
             {
                 "usr": "c:@F@crossvalidation#I#I#I#I#I#*C#S0_#",
@@ -18,7 +18,7 @@
                 "parent_name": "",
                 "name": "crossvalidation(int, int, int, int, int, char *, char *)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-                "line": 52,
+                "line": 55,
                 "column": 8
             }
         ]
