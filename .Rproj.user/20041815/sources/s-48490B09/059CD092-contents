@@ -132,26 +132,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }
     }
     
-    for (i = 0; )
+    arma::vec Error_Type_temp_average(h_vector_length_proper);
+    for (i = 0; i < h_vector_length_proper; ++i){
+      Error_Type_temp_average[i] = 0;
+    }
     
     
   }
 }
       
-      for i=1:h_vector_length
-        h = h_vector(i);
       
-      Indices_zero = (X_distance <= h);
-      Indices_zero_row_sum = sum(Indices_zero,2);
-      Indices_zero_row_sum_proper = Indices_zero_row_sum - 1;
-      if sum(Indices_zero_row_sum_proper == 0) > 0
-      h_vector_check(i) = 0;
-      end
-        end
-        h_vector_proper = h_vector(h_vector_check > 0);
-      h_vector_length_proper = length(h_vector_proper);
-      
-      Error_Type_temp_average = zeros(1,h_vector_length_proper);
       for i=1:h_vector_length_proper
         h = h_vector_proper(i);
       
