@@ -97,7 +97,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       h_vector_check[i] = 1;
     }
     
-    arma::mat Indices_zero(sample_size, sample_size);
     arma::vec Indices_zero_row_sum_proper(sample_size);
     for (i = 0; i < h_vector_length; ++i){
       h = h_vector[i];
@@ -106,11 +105,8 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         Indices_zero_row_sum_proper[j] = 0;
         for (k = 0; k < sample_size; ++k){
           if (X_distance(j, k) <= h){
-            Indices_zero(j, k) = 1;
-          }else{
-            Indices_zero(j, k) = 0;
+            Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] + 1;
           }
-          Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] + Indices_zero(j, k);
         }
         Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] - 1;
         
@@ -120,6 +116,8 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         }
       }
     }
+    
+    
   }
 }
       
