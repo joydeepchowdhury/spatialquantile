@@ -119,6 +119,19 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }
     }
     
+    arma::mat h_vector_proper(h_vector_length_proper);
+    i = 0;
+    j = 0;
+    while (j < h_vector_length){
+      if (h_vector_check[j] > 0){
+        h_vector_proper[i] = h_vector[j];
+        i = i + 1;
+        j = j + 1;
+      }else{
+        j = j + 1;
+      }
+    }
+    
     for (i = 0; )
     
     
