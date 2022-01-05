@@ -133,8 +133,12 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     }
     
     arma::vec Error_Type_temp_average(h_vector_length_proper);
+    arma::mat Type_temp(sample_size, q_res);
+    arma::vec Error_Type_temp(sample_size);
     for (i = 0; i < h_vector_length_proper; ++i){
-      Error_Type_temp_average[i] = 0;
+      h = h_vector_proper[i];
+      
+      for (j = 0; j < sample_size; ++j)
     }
     
     
@@ -142,11 +146,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
 }
       
       
-      for i=1:h_vector_length_proper
-        h = h_vector_proper(i);
-      
-      Type_temp = zeros(sample_size,size(Y_static,2));
-      Error_Type_temp = zeros(1,sample_size);
       for j=1:1:sample_size
         Y = Y_static;
       X = X_static;
