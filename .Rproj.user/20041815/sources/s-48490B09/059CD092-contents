@@ -86,6 +86,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   
   if (method_for_h == 1){
     int h_vector_length = 100;
+    double h;
     arma::vec h_vector(h_vector_length);
     for (i = 0; i < h_vector_length; ++i){
       h_vector[i] = min_X_distance + (i * ((max_X_distance - min_X_distance) / (h_vector_length - 1)));
@@ -95,14 +96,30 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     for (i = 0; i < h_vector_length; ++i){
       h_vector_check[i] = 1;
     }
+    
+    arma::mat Indices_zero(sample_size, sample_size);
+    arma::vec Indices_zero_row_sum_proper(sample_size);
+    for (i = 0; i < h_vector_length; ++i){
+      h = h_vector[i];
+      
+      for (j = 0; j < sample_size; ++j){
+        Indices_zero_row_sum_proper[j] = 0;
+        for (k = 0; k < sample_size; ++k){
+          if (X_distance(j, k) <= h){
+            Indices_zero(j, k) = 1;
+          }else{
+            Indices_zero(j, k) = 0;
+          }
+          Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] + Indices_zero(j, k);
+        }
+        Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] - 1;
+      }
+      
+      
+    }
   }
 }
       
-      if method_for_h == 1
-      h_vector = linspace(X_distance_limits(1), X_distance_limits(2),100);
-      h_vector_length = length(h_vector);
-      
-      h_vector_check = ones(size(h_vector));
       for i=1:h_vector_length
         h = h_vector(i);
       
