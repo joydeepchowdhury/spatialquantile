@@ -113,9 +113,12 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] + Indices_zero(j, k);
         }
         Indices_zero_row_sum_proper[j] = Indices_zero_row_sum_proper[j] - 1;
+        
+        if (Indices_zero_row_sum_proper[j] == 0){
+          h_vector_check[i] = 0;
+          break;
+        }
       }
-      
-      
     }
   }
 }
