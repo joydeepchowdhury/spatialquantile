@@ -86,14 +86,13 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   
   if (method_for_h == 1){
     int h_vector_length = 100;
+    int h_vector_length_proper = h_vector_length;
     double h;
     arma::vec h_vector(h_vector_length);
-    for (i = 0; i < h_vector_length; ++i){
-      h_vector[i] = min_X_distance + (i * ((max_X_distance - min_X_distance) / (h_vector_length - 1)));
-    }
-    
     arma::vec h_vector_check(h_vector_length);
     for (i = 0; i < h_vector_length; ++i){
+      h_vector[i] = min_X_distance + (i * ((max_X_distance - min_X_distance) / (h_vector_length - 1)));
+      
       h_vector_check[i] = 1;
     }
     
@@ -112,10 +111,15 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         
         if (Indices_zero_row_sum_proper[j] == 0){
           h_vector_check[i] = 0;
+          
+          h_vector_length_proper = h_vector_length_proper - 1;
+          
           break;
         }
       }
     }
+    
+    for (i = 0; )
     
     
   }
