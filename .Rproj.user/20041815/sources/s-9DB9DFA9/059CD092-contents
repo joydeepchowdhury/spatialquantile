@@ -133,6 +133,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     }
     
     int X_distance_h_count, local_values_current_index;
+    arma::vec target_Y(q_res), target_X(q_cov);
     arma::vec X_distance_check(sample_size);
     arma::vec Error_Type_temp_average(h_vector_length_proper);
     arma::mat Type_temp(sample_size, q_res);
@@ -141,6 +142,13 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       h = h_vector_proper[i];
       
       for (j = 0; j < sample_size; ++j){
+        for (l = 0; l < q_res; ++l){
+          target_Y[l] = Y_static(j, l);
+        }
+        for (l = 0; l < q_cov; ++l){
+          target_X[l] = X_static(j, l);
+        }
+        
         X_distance_count = 0;
         for (k = 0; k < sample_size; ++k){
           if (X_distance(j, k) <= h && k != j){
