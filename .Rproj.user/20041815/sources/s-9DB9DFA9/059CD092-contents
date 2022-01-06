@@ -155,8 +155,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         arma::mat local_Y_values(X_distance_h_count, q_res);
         arma::mat local_X_values(X_distance_h_count, q_cov);
         local_values_current_index = 0;
-        for (k = 0; k < X_distance_h_count; ++k){
-          if (X_distance_check[local_values_current_index] == 1){
+        for (k = 0; k < sample_size; ++k){
+          if (X_distance_check[k] == 1){
+            for (l = 0; l < q_res; ++l){
+              local_Y_values(local_values_current_index, l) = Y_static(k, l);
+            }
+            for (l = 0; l < q_cov; ++l){
+              local_X_values(local_values_current_index, l) = X_static(k, l);
+            }
+            
+            local_values_current_index = local_values_current_index + 1;
           }
         }
         while (local_values_count < X_distance_h_count){
