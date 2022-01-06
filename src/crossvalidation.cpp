@@ -178,6 +178,41 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         
         Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
         
+        if (strncmp(type, "coord_median", 20) == 0){
+          arma::vec weighted_median(q_res);
+          arma::vec vector_concerned(X_distance_h_count), vector_concerned_sorted(X_distance_h_count);
+          arma::vec weights_by_sorted_index(X_distance_h_count), cumulative_weights_by_sorted_index(X_distance_h_count);
+          for (k = 0; k < q_res; ++k){
+            for (l = 0; l < X_distance_h_count; ++l){
+              vector_concerned[l] = local_Y_values(l, k);
+            }
+            arma::uvec vector_concerned_sorted_index = arma::sort_index(vector_concerned, "ascend");
+            for (l = 0; l < X_distance_h_count; ++l){
+              vector_concerned_sorted[l] = vector_concerned[vector_concerned_sorted_index[l]];
+              weights_by_sorted_index[l] = Weights[vector_concerned_sorted_index[l]];
+              
+              cumulative_weights_by_sorted_index[l] = weights_by_sorted_index[l];
+              if (l > 0){
+                cumulative_weights_by_sorted_index[l] = cumulative_weights_by_sorted_index[l] +
+                  cumulative_weights_by_sorted_index[l - 1];
+              }
+              if (cumulative_weights_by_sorted_index[l] >= 0.5){
+                index_weighted_quantile = l;
+                weighted_median[k] = vector_concerned_sorted[index_weighted_quantile];
+                break;
+              }
+            }
+          }
+          
+          for (k = 0; k < q_res; ++k){
+            Type_temp(j, k) = weighted_median[k];
+          }
+        }
+        
+        
+        
+        
+        
         
         
       }
@@ -189,32 +224,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       
       
       for j=1:1:sample_size
-        Y = Y_static;
-      X = X_static;
-      distances = X_distance(j,:);
-      distances(j) = [];
-      target_Y = Y(j,:);
-      target_X = X(j,:);
-      Y(j,:) = [];
-      X(j,:) = [];
-      
-      local_Y_values = Y((distances <= h),:);
-      local_X_values = X((distances <= h),:);
-      t_vector = 1:1:size(X,2);
-      Weights = kernelweights(target_X, local_X_values, t_vector, h, Kernel);
-      
-      if strcmp(type, 'coord_median') == 1
-      weighted_median = zeros(1,size(local_Y_values,2));
-      for k=1:size(local_Y_values,2)
-        vector_concerned = local_Y_values(:,k);
-      [vector_concerned_sorted, vector_concerned_sorted_index] = ...
-        sort(vector_concerned,'ascend');
-      weights_by_sorted_index = Weights(vector_concerned_sorted_index);
-      cumulative_weights_by_sorted_index = cumsum(weights_by_sorted_index);
-      index_weighted_quantile = find(cumulative_weights_by_sorted_index >= 0.5, 1);
-      weighted_median(k) = vector_concerned_sorted(index_weighted_quantile);
-      end
-        Type_temp(j,:) = weighted_median;
+        
       elseif strcmp(type, 'coord_mean') == 1
       local_Y_values_weighted = (Weights * ones(1,size(local_Y_values,2)))...
                                                                           .* local_Y_values;
