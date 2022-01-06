@@ -132,7 +132,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }
     }
     
-    double X_distance_h_count;
+    int X_distance_h_count;
     arma::vec X_distance_check(sample_size);
     arma::vec Error_Type_temp_average(h_vector_length_proper);
     arma::mat Type_temp(sample_size, q_res);
@@ -149,6 +149,14 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
             X_distance_h_count = X_distance_h_count + 1;
           }else{
             X_distance_check[k] = 0;
+          }
+        }
+        
+        arma::mat local_Y_values(X_distance_h_count, q_res);
+        arma::mat local_X_values(X_distance_h_count, q_cov);
+        for (k = 0; k < X_distance_h_count; ++k){
+          for (l = 0; l < q_res; ++l){
+            
           }
         }
       }
