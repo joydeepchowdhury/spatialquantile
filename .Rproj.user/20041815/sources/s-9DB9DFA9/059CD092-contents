@@ -175,15 +175,11 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
             local_values_current_index = local_values_current_index + 1;
           }
         }
-        while (local_values_count < X_distance_h_count){
-          
-          for (l = 0; l < q_res; ++l){
-            local_Y_values(k, l) = Y_static(X_)
-          }
-        }
-        for (k = 0; k < X_distance_h_count; ++k){
-          
-        }
+        
+        Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
+        
+        
+        
       }
     }
     
