@@ -132,13 +132,26 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }
     }
     
+    double X_distance_h_count;
+    arma::vec X_distance_check(sample_size);
     arma::vec Error_Type_temp_average(h_vector_length_proper);
     arma::mat Type_temp(sample_size, q_res);
     arma::vec Error_Type_temp(sample_size);
     for (i = 0; i < h_vector_length_proper; ++i){
       h = h_vector_proper[i];
       
-      for (j = 0; j < sample_size; ++j)
+      for (j = 0; j < sample_size; ++j){
+        X_distance_count = 0;
+        for (k = 0; k < sample_size; ++k){
+          if (X_distance(j, k) <= h && k != j){
+            X_distance_check[k] = 1;
+            
+            X_distance_h_count = X_distance_h_count + 1;
+          }else{
+            X_distance_check[k] = 0;
+          }
+        }
+      }
     }
     
     
