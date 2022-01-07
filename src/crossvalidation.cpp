@@ -247,20 +247,20 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     }
     
     int optimum_h_index = 0;
-    for
+    for (i = 0; i < h_vector_length_proper; ++i){
+      if (Error_Type_temp_average[i] < Error_Type_temp_average[optimum_h_index]){
+        optimum_h_index = i;
+      }
+    }
     
+    double optimum_h = h_vector_proper[optimum_h_index];
     
+    optimum_h_or_neighborhood_size = optimum_h;
   }
 }
       
       
       
-        Error_Type_temp_average(i) = mean(Error_Type_temp);
-      end
-        [~,optimum_h_index] = min(Error_Type_temp_average);
-      optimum_h = h_vector_proper(optimum_h_index);
-      
-      optimum_h_or_neighborhood_size = optimum_h;
       else
         Number_lower = 5;
       Portion_higher = 0.5;
