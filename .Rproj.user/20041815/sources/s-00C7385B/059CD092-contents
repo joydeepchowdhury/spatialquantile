@@ -231,12 +231,12 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           }
         }
         
+        arma::vec y(q_res);
+        for (k = 0; k < q_res; ++k){
+          y[k] = target_Y[k] - Type_temp(j, k);
+        }
         
-        
-        
-        
-        
-        
+        Error_Type_temp[j] = Lp_norm(t_vector_Y, y, p_response);
       }
     }
     
@@ -245,12 +245,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
 }
       
       
-      for j=1:1:sample_size
-        
       
-        
-        Error_Type_temp(j) = Lp_norm(t_vector_Y, (target_Y - Type_temp(j,:)), p_response);
-      end
         Error_Type_temp_average(i) = mean(Error_Type_temp);
       end
         [~,optimum_h_index] = min(Error_Type_temp_average);
