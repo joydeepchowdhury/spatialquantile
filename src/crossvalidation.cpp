@@ -223,6 +223,9 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = weighted_mean[k];
           }
+        }else if (strncmp(type, "spatial_median", 20) == 0){
+          arma::vec spatialmedian = spatialquantile(local_Y_values, Weights, 0, 0, t_vector_Y);
+          
           
         }
         
@@ -242,10 +245,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       
       for j=1:1:sample_size
         
-      elseif strcmp(type, 'coord_mean') == 1
-      local_Y_values_weighted = (Weights * ones(1,size(local_Y_values,2)))...
-                                                                          .* local_Y_values;
-      Type_temp(j,:) = mean(local_Y_values_weighted,1);
       elseif strcmp(type, 'spatial_median') == 1
       Type_temp(j,:) = spatialquantile(local_Y_values, Weights, 0, 0, t_vector_Y);
       else
