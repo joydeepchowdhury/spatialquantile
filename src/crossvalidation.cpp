@@ -207,6 +207,15 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = weighted_median[k];
           }
+        }else if (strncmp(type, "coord_mean", 20) == 0){
+          arma::vec weighted_mean(q_res);
+          for (k = 0; k < q_res; ++k){
+            weighted_mean[k] = 0;
+            for (l = 0; l < X_distance_h_count; ++l){
+              weighted_mean[k]
+            }
+          }
+          
         }
         
         
