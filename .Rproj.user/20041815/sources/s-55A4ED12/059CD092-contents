@@ -256,6 +256,18 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     double optimum_h = h_vector_proper[optimum_h_index];
     
     optimum_h_or_neighborhood_size = optimum_h;
+  }else{
+    int Number_lower = 5;
+    double Portion_higher = 0.5;
+    int Number_higher = (int)ceil(Portion_higher * sample_size);
+    int length_Neighborhood_size_vector = Number_higher - Number_lower + 1;
+    arma::vec Neighborhood_size_vector(length_Neighborhood_size_vector);
+    for (i = 0; i < length_Neighborhood_size_vector; ++i){
+      Neighborhood_size_vector[i] = Number_lower + i;
+    }
+    
+    arma::vec Error_Type_temp_average(length_Neighborhood_size_vector);
+    
   }
 }
       
