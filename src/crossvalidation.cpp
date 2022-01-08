@@ -149,6 +149,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           target_X[l] = X_static(j, l);
         }
         
+        X_distance_h_count = 0;
         for (k = 0; k < sample_size; ++k){
           if (X_distance(j, k) <= h && k != j){
             X_distance_check[k] = 1;
@@ -272,6 +273,8 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     arma::vec Error_Type_temp(sample_size);
     arma::vec target_Y(q_res), target_X(q_cov);
     arma::vec distances(sample_size - 1);
+    int X_distance_h_count, local_values_current_index;
+    arma::vec X_distance_check(sample_size);
     for (i = 0; i < length_Neighborhood_size_vector; ++i){
       neighborhood_size = Neighborhood_size_vector[i];
       
@@ -294,7 +297,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         
         h = sorted_Distance_X[neighborhood_size - 1];
         
-        X_distance_count = 0;
+        X_distance_h_count = 0;
         for (k = 0; k < sample_size; ++k){
           if (X_distance(j, k) <= h && k != j){
             X_distance_check[k] = 1;
@@ -305,6 +308,24 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           }
         }
         
+        arma::mat local_Y_values(X_distance_h_count, q_res);
+        arma::mat local_X_values(X_distance_h_count, q_cov);
+        local_values_current_index = 0;
+        for (k = 0; k < sample_size; ++k){
+          if (X_distance_check[k] == 1){
+            for (l = 0; l < q_res; ++l){
+              local_Y_values(local_values_current_index, l) = Y_static(k, l);
+            }
+            for (l = 0; l < q_cov; ++l){
+              local_X_values(local_values_current_index, l) = X_static(k, l);
+            }
+            
+            local_values_current_index = local_values_current_index + 1;
+          }
+        }
+        
+        Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
+        
       }
       
     }
@@ -314,19 +335,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       
       
       for j=1:1:sample_size
-        Y = Y_static;
-      X = X_static;
-      
-      Y(j,:) = [];
-      X(j,:) = [];
-      
-      sorted_Distance_X = sort(distances, 'ascend');
-      h = sorted_Distance_X(neighborhood_size);
-      
-      local_Y_values = Y((distances <= h),:);
-      local_X_values = X((distances <= h),:);
-      t_vector = 1:1:size(X,2);
-      Weights = kernelweights(target_X, local_X_values, t_vector, h, Kernel);
+        
       
       if strcmp(type, 'coord_median') == 1
       weighted_median = zeros(1,size(local_Y_values,2));
