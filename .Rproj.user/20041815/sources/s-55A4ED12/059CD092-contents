@@ -274,6 +274,23 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       neighborhood_size = Neighborhood_size_vector[i];
       
       for (j = 0; j < sample_size; ++j){
+        for (l = 0; l < q_res; ++l){
+          target_Y[l] = Y_static(j, l);
+        }
+        for (l = 0; l < q_cov; ++l){
+          target_X[l] = X_static(j, l);
+        }
+        
+        X_distance_count = 0;
+        for (k = 0; k < sample_size; ++k){
+          if (X_distance(j, k) <= h && k != j){
+            X_distance_check[k] = 1;
+            
+            X_distance_h_count = X_distance_h_count + 1;
+          }else{
+            X_distance_check[k] = 0;
+          }
+        }
         
       }
       
