@@ -267,17 +267,17 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     }
     
     arma::vec Error_Type_temp_average(length_Neighborhood_size_vector);
+    int neighborhood_size;
+    for (i = 0; i < length_Neighborhood_size_vector; ++i){
+      neighborhood_size = Neighborhood_size_vector[i];
+      
+    }
     
   }
 }
       
       
       
-      else
-        Number_lower = 5;
-      Portion_higher = 0.5;
-      Number_higher = ceil(Portion_higher * sample_size);
-      Neighborhood_size_vector = (Number_lower:1:Number_higher);
       
       Error_Type_temp_average = zeros(1,length(Neighborhood_size_vector));
       for i=1:length(Neighborhood_size_vector)
