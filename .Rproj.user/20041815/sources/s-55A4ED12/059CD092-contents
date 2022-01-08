@@ -268,8 +268,14 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     
     arma::vec Error_Type_temp_average(length_Neighborhood_size_vector);
     int neighborhood_size;
+    arma::mat Type_temp(sample_size, q_res);
+    arma::vec Error_Type_temp(sample_size);
     for (i = 0; i < length_Neighborhood_size_vector; ++i){
       neighborhood_size = Neighborhood_size_vector[i];
+      
+      for (j = 0; j < sample_size; ++j){
+        
+      }
       
     }
     
@@ -277,14 +283,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
 }
       
       
-      
-      
-      Error_Type_temp_average = zeros(1,length(Neighborhood_size_vector));
-      for i=1:length(Neighborhood_size_vector)
-        neighborhood_size = Neighborhood_size_vector(i);
-      
-      Type_temp = zeros(sample_size,size(Y_static,2));
-      Error_Type_temp = zeros(1,sample_size);
       for j=1:1:sample_size
         Y = Y_static;
       X = X_static;
