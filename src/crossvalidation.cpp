@@ -149,7 +149,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           target_X[l] = X_static(j, l);
         }
         
-        X_distance_count = 0;
         for (k = 0; k < sample_size; ++k){
           if (X_distance(j, k) <= h && k != j){
             X_distance_check[k] = 1;
@@ -259,6 +258,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   }else{
     int Number_lower = 5;
     double Portion_higher = 0.5;
+    double h;
     int Number_higher = (int)ceil(Portion_higher * sample_size);
     int length_Neighborhood_size_vector = Number_higher - Number_lower + 1;
     arma::vec Neighborhood_size_vector(length_Neighborhood_size_vector);
@@ -270,8 +270,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     int neighborhood_size;
     arma::mat Type_temp(sample_size, q_res);
     arma::vec Error_Type_temp(sample_size);
-    
-    int X_distance_h_count, local_values_current_index;
     arma::vec target_Y(q_res), target_X(q_cov);
     arma::vec distances(sample_size - 1);
     for (i = 0; i < length_Neighborhood_size_vector; ++i){
@@ -291,6 +289,10 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         for (k = j; k < sample_size; ++k){
           distances[k - 1] = X_distance(j, k);
         }
+        
+        arma::vec sorted_Distance_X = arma::sort(distances, "ascend");
+        
+        h = sorted_Distance_X[neighborhood_size - 1];
         
         X_distance_count = 0;
         for (k = 0; k < sample_size; ++k){
