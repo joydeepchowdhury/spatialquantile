@@ -270,6 +270,10 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     int neighborhood_size;
     arma::mat Type_temp(sample_size, q_res);
     arma::vec Error_Type_temp(sample_size);
+    
+    int X_distance_h_count, local_values_current_index;
+    arma::vec target_Y(q_res), target_X(q_cov);
+    arma::vec distances(sample_size - 1);
     for (i = 0; i < length_Neighborhood_size_vector; ++i){
       neighborhood_size = Neighborhood_size_vector[i];
       
@@ -279,6 +283,13 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         }
         for (l = 0; l < q_cov; ++l){
           target_X[l] = X_static(j, l);
+        }
+        
+        for (k = 0; k < (j - 1); ++k){
+          distances[k] = X_distance(j, k);
+        }
+        for (k = j; k < sample_size; ++k){
+          distances[k - 1] = X_distance(j, k);
         }
         
         X_distance_count = 0;
@@ -303,10 +314,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       for j=1:1:sample_size
         Y = Y_static;
       X = X_static;
-      distances = X_distance(j,:);
-      distances(j) = [];
-      target_Y = Y(j,:);
-      target_X = X(j,:);
+      
       Y(j,:) = [];
       X(j,:) = [];
       
