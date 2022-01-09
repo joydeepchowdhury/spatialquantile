@@ -336,6 +336,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
             }
             arma::uvec vector_concerned_sorted_index = arma::sort_index(vector_concerned, "ascend");
             for (l = 0; l < X_distance_h_count; ++l){
+              vector_concerned_sorted[l] = vector_concerned[vector_concerned_sorted_index[l]];
+              weights_by_sorted_index[l] = Weights[vector_concerned_sorted_index[l]];
+              
+              cumulative_weights_by_sorted_index[l] = weights_by_sorted_index[l];
+              if (l > 0){
+                cumulative_weights_by_sorted_index[l] = cumulative_weights_by_sorted_index[l] +
+                  cumulative_weights_by_sorted_index[l - 1];
+              }
+              if (cumulative_weights_by_sorted_index[l] >= 0.5){
+                index_weighted_quantile = l;
         
       }
       
