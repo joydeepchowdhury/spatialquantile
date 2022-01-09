@@ -386,6 +386,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         
         Error_Type_temp[j] = Lp_norm(t_vector_Y, y, p_response);
       }
+      
+      Error_Type_temp_average[i] = 0;
+      for (j = 0; j < sample_size; ++j){
+        Error_Type_temp_average[i] = Error_Type_temp_average[i] + Error_Type_temp[j];
+      }
+      Error_Type_temp_average[i] = Error_Type_temp_average[i] / sample_size;
+    }
+    
+    int optimum_h_index = 0;
+    for (i = 0; i < h_vector_length_proper; ++i){
         
       }
       
