@@ -346,6 +346,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
               }
               if (cumulative_weights_by_sorted_index[l] >= 0.5){
                 index_weighted_quantile = l;
+                weighted_median[k] = vector_concerned_sorted[index_weighted_quantile];
+                break;
+              }
+            }
+          }
+          
+          for (k = 0; k < q_res; ++k){
+            Type_temp(j, k) = weighted_median[k];
+          }
+        }else if (strncmp(type, "coord_mean", 20) == 0){
         
       }
       
