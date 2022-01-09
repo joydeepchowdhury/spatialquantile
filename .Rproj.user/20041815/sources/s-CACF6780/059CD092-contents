@@ -326,6 +326,17 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
         
         Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
         
+        if (strncmp(type, "coord_median", 20) == 0){
+          arma::vec weighted_median(q_res);
+          arma::vec vector_concerned(X_distance_h_count), vector_concerned_sorted(X_distance_h_count);
+          arma::vec weights_by_sorted_index(X_distance_h_count), cumulative_weights_by_sorted_index(X_distance_h_count);
+          for (k = 0; k < q_res; ++k){
+            for (l = 0; l < X_distance_h_count; ++l){
+              vector_concerned[l] = local_Y_values(l, k);
+            }
+            arma::uvec vector_concerned_sorted_index = arma::sort_index(vector_concerned, "ascend");
+            for (l = 0; l < X_distance_h_count; ++l){
+        
       }
       
     }
