@@ -356,6 +356,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
             Type_temp(j, k) = weighted_median[k];
           }
         }else if (strncmp(type, "coord_mean", 20) == 0){
+          arma::vec weighted_mean(q_res);
+          double sum_Weights;
+          for (k = 0; k < q_res; ++k){
+            weighted_mean[k] = 0;
+            sum_Weights = 0;
+            for (l = 0; l < X_distance_h_count; ++l){
+              weighted_mean[k] = weighted_mean[k] + (Weights[l] * local_Y_values(l, k));
+              sum_Weights = sum_Weights + Weights[l];
+            }
+            weighted_mean[k] = weighted_mean[k] / sum_Weights;
         
       }
       
