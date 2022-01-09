@@ -366,6 +366,16 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
               sum_Weights = sum_Weights + Weights[l];
             }
             weighted_mean[k] = weighted_mean[k] / sum_Weights;
+          }
+          
+          for (k = 0; k < q_res; ++k){
+            Type_temp(j, k) = weighted_mean[k];
+          }
+        }else{    // strncmp(type, "spatial_median", 20) == 0
+          arma::vec spatialmedian = spatialquantile(local_Y_values, Weights, 0, 0, t_vector_Y);
+          
+          for (k = 0; k < q_res; ++k){
+            Type_temp(j, k) = spatialmedian[k];
         
       }
       
