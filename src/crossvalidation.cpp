@@ -396,8 +396,14 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     
     int optimum_neighborhood_size_index = 0;
     for (i = 0; i < length_Neighborhood_size_vector; ++i){
-      if (Error_Type_temp_average[i] < Error_Type_temp_average[optimum_neighborhood_size_index]){}
+      if (Error_Type_temp_average[i] < Error_Type_temp_average[optimum_neighborhood_size_index]){
+        optimum_neighborhood_size_index = i;
+      }
     }
+    
+    int optimum_neighborhood_size = Neighborhood_size_vector[optimum_neighborhood_size_index];
+    
+    optimum_h_or_neighborhood_size = optimum_neighborhood_size;
         
       }
       
@@ -409,7 +415,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       
       
       
-        [~,optimum_neighborhood_size_index] = min(Error_Type_temp_average);
       optimum_neighborhood_size = Neighborhood_size_vector(optimum_neighborhood_size_index);
       
       optimum_h_or_neighborhood_size = optimum_neighborhood_size;
