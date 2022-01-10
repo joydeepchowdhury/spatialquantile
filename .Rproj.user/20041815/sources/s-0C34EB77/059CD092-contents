@@ -394,8 +394,10 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       Error_Type_temp_average[i] = Error_Type_temp_average[i] / sample_size;
     }
     
-    int optimum_h_index = 0;
-    for (i = 0; i < h_vector_length_proper; ++i){
+    int optimum_neighborhood_size_index = 0;
+    for (i = 0; i < length_Neighborhood_size_vector; ++i){
+      if ()
+    }
         
       }
       
@@ -405,10 +407,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
 }
       
       
-      for j=1:1:sample_size
-        
       
-      if strcmp(type, 'coord_median') == 1
       weighted_median = zeros(1,size(local_Y_values,2));
       for k=1:size(local_Y_values,2)
         vector_concerned = local_Y_values(:,k);
