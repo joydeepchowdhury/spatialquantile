@@ -3,8 +3,8 @@
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
-// The function `spquantile` computes the weighted spatial quantile from the
-// data matrix `X_data_original` with corresponding weights in the variable
+// The function `spatialquantile` computes the weighted spatial quantile from
+// the data matrix `X_data_original` with corresponding weights in the variable
 // `Weights`. The data matrix `X_data_original` is of dimension `n`-by-`p` and
 // contains `n` functional observations which are recorded on a grid of length
 // `p`, given in the row vector `t_vector`. The variable `Weights` is a column

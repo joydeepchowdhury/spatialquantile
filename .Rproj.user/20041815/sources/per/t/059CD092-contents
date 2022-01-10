@@ -408,5 +408,3 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   
   return optimum_h_or_neighborhood_size;
 }
-      
-      
