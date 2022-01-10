@@ -396,7 +396,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     
     int optimum_neighborhood_size_index = 0;
     for (i = 0; i < length_Neighborhood_size_vector; ++i){
-      if ()
+      if (Error_Type_temp_average[i])
     }
         
       }
@@ -408,15 +408,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       
       
       
-      weighted_median = zeros(1,size(local_Y_values,2));
-      for k=1:size(local_Y_values,2)
-        vector_concerned = local_Y_values(:,k);
-      [vector_concerned_sorted, vector_concerned_sorted_index] = ...
-        sort(vector_concerned,'ascend');
-      weights_by_sorted_index = Weights(vector_concerned_sorted_index);
-      cumulative_weights_by_sorted_index = cumsum(weights_by_sorted_index);
-      index_weighted_quantile = find(cumulative_weights_by_sorted_index >= 0.5, 1);
-      weighted_median(k) = vector_concerned_sorted(index_weighted_quantile);
+      
       end
         Type_temp(j,:) = weighted_median;
       elseif strcmp(type, 'coord_mean') == 1
