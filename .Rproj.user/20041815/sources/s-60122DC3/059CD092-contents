@@ -404,22 +404,9 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
     int optimum_neighborhood_size = Neighborhood_size_vector[optimum_neighborhood_size_index];
     
     optimum_h_or_neighborhood_size = optimum_neighborhood_size;
-        
-      }
-      
-    }
-    
   }
+  
+  return optimum_h_or_neighborhood_size;
 }
       
       
-      
-      
-      optimum_neighborhood_size = Neighborhood_size_vector(optimum_neighborhood_size_index);
-      
-      optimum_h_or_neighborhood_size = optimum_neighborhood_size;
-      end
-        
-        end
-        
-        
