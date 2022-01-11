@@ -84,3 +84,15 @@ Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weig
     CovMatrix = t1matrix - (t2vector' * t2vector);
     
     E_2 = sum(Weights.^2) / sum((Weights > 0));
+    E_1 = sum(Weights) / sum((Weights > 0));
+    CovQuantileMatrix = (E_2 / (E_1^2)) * ( Hessian \ (CovMatrix / Hessian) );
+    eigenCovQuantileMatrix = eig(CovQuantileMatrix);
+    
+    probvector = 1 - (1 - alpha).^( 1 ./ (2.^(1:d_n)) );
+    UpperCutoffs = sqrt(eigenCovQuantileMatrix)' .* norminv((1 - (probvector / 2)), 0, 1);
+    LowerCutoffs = sqrt(eigenCovQuantileMatrix)' .* norminv((probvector / 2), 0, 1);
+    
+    ConfidenceSet = (1 / sqrt(n)) * [UpperCutoffs; LowerCutoffs] * Eigenvectors_sorted_truncated';
+    
+    end
+      
