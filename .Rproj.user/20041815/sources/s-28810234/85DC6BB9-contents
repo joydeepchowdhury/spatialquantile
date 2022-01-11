@@ -34,3 +34,13 @@ ConfidenceSet = ones(2,1) * z;
 return
   end
 
+  n = size(Data_original,1);
+if sum(Weights) ~= 1
+Weights = Weights / sum(Weights);
+end
+  
+  t_1 = sqrt(n);
+t_2 = 2 * n^(1/3);
+t_3 = min(t_1,t_2);
+d_n = floor(t_3);
+
