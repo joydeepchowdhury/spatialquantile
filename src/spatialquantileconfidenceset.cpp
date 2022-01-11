@@ -64,3 +64,13 @@ Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weig
   
   Hessian = zeros(d_n);
   for i=1:n
+    Hessian = Hessian + ( (1 / sqrt( sum((Quantile - Data(i,:)).^2) )) * eye(d_n)...
+      - (1 / ( sqrt( sum((Quantile - Data(i,:)).^2) ) )^3) *...
+      ( (Quantile - Data(i,:))' * (Quantile - Data(i,:)) ) ) * Weights(i);
+  end
+    Hessian = Hessian / sum(Weights);
+  
+  t1matrix = zeros(d_n);
+  t2vector = zeros(1, d_n);
+  for i=1:n
+    t1matrix = t1matrix + ( (1 / sum((Quantile - Data(i,:)).^2)) *...
