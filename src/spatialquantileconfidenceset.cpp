@@ -44,3 +44,13 @@ t_2 = 2 * n^(1/3);
 t_3 = min(t_1,t_2);
 d_n = floor(t_3);
 
+Weighted_Mean = mean((Weights * ones(1,size(Data_original,2))) .* Data_original, 1);
+Centred_Data = Data_original - ones(n,1) * Weighted_Mean;
+Weighted_Cov_Matrix = Centred_Data' * diag(Weights) * Centred_Data;
+Weighted_Cov_Matrix = (Weighted_Cov_Matrix + Weighted_Cov_Matrix') / 2;
+[Eigenvectors, Eigenvalues] = eig(Weighted_Cov_Matrix);
+vector_Eigenvalues = diag(Eigenvalues);
+[~, index_Eigenvalues_sorted] = sort(vector_Eigenvalues,'descend');
+Eigenvectors_sorted = Eigenvectors(:,index_Eigenvalues_sorted);
+Coefficient_Matrix = Centred_Data * Eigenvectors_sorted;
+Eigenvectors_sorted_truncated = Eigenvectors_sorted(:,1:d_n);
