@@ -54,3 +54,13 @@ vector_Eigenvalues = diag(Eigenvalues);
 Eigenvectors_sorted = Eigenvectors(:,index_Eigenvalues_sorted);
 Coefficient_Matrix = Centred_Data * Eigenvectors_sorted;
 Eigenvectors_sorted_truncated = Eigenvectors_sorted(:,1:d_n);
+Coefficient_Matrix_truncated = Coefficient_Matrix(:,1:d_n);
+Data_reduced = Coefficient_Matrix_truncated;
+
+Data = Data_reduced;
+
+Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weighted_Mean)...
+  * Eigenvectors_sorted_truncated;
+  
+  Hessian = zeros(d_n);
+  for i=1:n
