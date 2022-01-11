@@ -74,3 +74,13 @@ Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weig
   t2vector = zeros(1, d_n);
   for i=1:n
     t1matrix = t1matrix + ( (1 / sum((Quantile - Data(i,:)).^2)) *...
+      ( (Quantile - Data(i,:))' * (Quantile - Data(i,:)) ) ) * Weights(i);
+  
+  t2vector = t2vector + ( (Quantile - Data(i,:)) / sqrt( sum((Quantile - Data(i,:)).^2) ) )...
+    * Weights(i);
+    end
+      t1matrix = t1matrix / sum(Weights);
+    t2vector = t2vector / sum(Weights);
+    CovMatrix = t1matrix - (t2vector' * t2vector);
+    
+    E_2 = sum(Weights.^2) / sum((Weights > 0));
