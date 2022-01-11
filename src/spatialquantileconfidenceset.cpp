@@ -22,3 +22,15 @@ arma::mat spatialquantileconfidenceset(arma::mat Data_original, arma::vec Weight
   
   return ConfidenceSet;
 }
+
+
+function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
+  
+  z = Data_original(1,:);
+Difference = ones(size(Data_original,1),1) * z - Data_original;
+norm_Difference = sqrt(trapz(t_vector, Difference.^2, 2));
+if sum(norm_Difference) == 0
+ConfidenceSet = ones(2,1) * z;
+return
+  end
+
