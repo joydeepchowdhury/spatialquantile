@@ -74,17 +74,18 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  double t_1 = sqrt(n);
+  double t_2 = 2 * pow(n, 1/3);
+  double t_3 = min(t_1, t_2);
+  double d_n = floor(t_3);
+  
   return ConfidenceSet;
 }
 
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-  
-  t_1 = sqrt(n);
-t_2 = 2 * n^(1/3);
-t_3 = min(t_1,t_2);
-d_n = floor(t_3);
+
 
 Weighted_Mean = mean((Weights * ones(1,size(Data_original,2))) .* Data_original, 1);
 Centred_Data = Data_original - ones(n,1) * Weighted_Mean;
