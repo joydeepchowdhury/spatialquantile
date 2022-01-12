@@ -54,7 +54,7 @@ arma::vec spatialquantile(arma::mat Data, arma::vec Weights, int u_index, double
   // Checking whether there is only one distinct observation in Data
   arma::vec z(p);
   for (i = 0; i < p; ++i){
-    z[i] = Data(1, i);
+    z[i] = Data(0, i);
   }
   
   arma::mat Difference(n, p);
@@ -266,7 +266,7 @@ arma::vec spatialquantile(arma::mat Data, arma::vec Weights, int u_index, double
   // Checking whether the data lie on a straight line, and computing the quantile in that case
   
   for (j = 0; j < d_n; ++j){
-    x[j] = Data(1, j);
+    x[j] = Data(0, j);
   }
   
   arma::vec direction_vector(d_n);
