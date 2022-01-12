@@ -63,17 +63,23 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     return ConfidenceSet;
   }
   
+  // Main computation begins
+  double sum_Weights = 0;
+  for (i = 0; i < n; ++i){
+    sum_Weights = sum_Weights + Weights[i];
+  }
+  if (sum_Weights != 1){
+    for (i = 0; i < n; ++i){
+      Weights[i] = Weights[i] / sum_Weights;
+    }
+  }
+  
   return ConfidenceSet;
 }
 
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-
-  n = size(Data_original,1);
-if sum(Weights) ~= 1
-Weights = Weights / sum(Weights);
-end
   
   t_1 = sqrt(n);
 t_2 = 2 * n^(1/3);
