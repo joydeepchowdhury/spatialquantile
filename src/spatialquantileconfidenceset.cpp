@@ -40,7 +40,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
-  arma::vec norm_difference(n);
+  arma::vec norm_sq_difference(n);
   double temp1;
   for (i = 0; i < n; ++i){
     temp1 = 0;
@@ -48,18 +48,19 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
       // Integration computed using trapezoidal rule
       temp1 = temp1 + ((pow(Difference(i, j + 1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
     }
-    norm_difference[i] = sqrt(temp1);
+    norm_sq_difference[i] = temp1;
   }
   
-  double sum_norm_difference = 0;
+  double sum_norm_sq_difference = 0;
   for (i = 0; i < n; ++i){
-    sum_norm_difference = sum_norm_difference + norm_difference[i];
+    sum_norm_sq_difference = sum_norm_sq_difference + norm_sq_difference[i];
   }
-  if (sum_norm_difference == 0){
+  if (sum_norm_sq_difference == 0){
     for (j = 0; j < p; ++j){
-      Quantile[j] = z[j];
+      ConfidenceSet(0, j) = z[j];
+      ConfidenceSet(1, j) = z[j];
     }
-    return Quantile;
+    return ConfidenceSet;
   }
   
   return ConfidenceSet;
