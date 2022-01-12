@@ -79,6 +79,21 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   double t_3 = min(t_1, t_2);
   double d_n = floor(t_3);
   
+  arma::vec Weighted_Mean;
+  for (j = 0; j < p; ++j){
+    Weighted_Mean[j] = 0;
+    for (i = 0; i < n; ++i){
+      Weighted_Mean[j] = Weighted_Mean[j] + (Weights[i] * Data(i, j));
+    }
+  }
+  
+  arma::mat Centred_Data(n, p);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < p; ++j){
+      Centred_Data(i, j) = Data(i, j) - Weighted_Mean[j];
+    }
+  }
+  
   return ConfidenceSet;
 }
 
