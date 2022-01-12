@@ -18,7 +18,49 @@
 
 
 // [[Rcpp::export]]
-arma::mat spatialquantileconfidenceset(arma::mat Data_original, arma::vec Weights, int u_index, double c, arma::vec t_vector, double alpha){
+arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
+                                       int u_index, double c, arma::vec t_vector, double alpha){
+  
+  int n = Data.n_rows;
+  int p = Data.n_cols;
+  arma::mat ConfidenceSet(2, p);
+  
+  int i, j, k;
+  
+  // Checking whether there is only one distinct observation in Data
+  arma::vec z(p);
+  for (i = 0; i < p; ++i){
+    z[i] = Data(1, i);
+  }
+  
+  arma::mat Difference(n, p);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < p; ++j){
+      Difference(i, j) = z[j] - Data(i, j);
+    }
+  }
+  
+  arma::vec norm_difference(n);
+  double temp1;
+  for (i = 0; i < n; ++i){
+    temp1 = 0;
+    for (j = 0; j < (p - 1); ++j){
+      // Integration computed using trapezoidal rule
+      temp1 = temp1 + ((pow(Difference(i, j + 1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
+    }
+    norm_difference[i] = sqrt(temp1);
+  }
+  
+  double sum_norm_difference = 0;
+  for (i = 0; i < n; ++i){
+    sum_norm_difference = sum_norm_difference + norm_difference[i];
+  }
+  if (sum_norm_difference == 0){
+    for (j = 0; j < p; ++j){
+      Quantile[j] = z[j];
+    }
+    return Quantile;
+  }
   
   return ConfidenceSet;
 }

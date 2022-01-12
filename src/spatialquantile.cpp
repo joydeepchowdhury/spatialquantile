@@ -51,7 +51,7 @@ arma::vec spatialquantile(arma::mat Data, arma::vec Weights, int u_index, double
   
   int i, j, k;
   
-  // Checking whether there is only one distinct observation in Data_original
+  // Checking whether there is only one distinct observation in Data
   arma::vec z(p);
   for (i = 0; i < p; ++i){
     z[i] = Data(1, i);
