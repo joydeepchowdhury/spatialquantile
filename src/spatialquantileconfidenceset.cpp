@@ -135,6 +135,13 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   
   arma::mat Data_reduced = Coefficient_Matrix_truncated;
   
+  arma::vec quantile_shifted = spatialquantile(Data, Weights, u_index, c, t_vector);
+  for (j = 0; j < p; ++j){
+    quantile_shifted[j] = quantile_shifted[j] - Weighted_Mean[j];
+  }
+  
+  
+  
   Data = Data_reduced;
   
   return ConfidenceSet;
@@ -143,10 +150,6 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-Data_reduced = Coefficient_Matrix_truncated;
-
-Data = Data_reduced;
-
 Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weighted_Mean)...
   * Eigenvectors_sorted_truncated;
   
