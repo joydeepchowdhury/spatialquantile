@@ -122,6 +122,17 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  arma::mat Coefficient_Matrix_truncated(n, d_n);
+  for (i = 0; i < n; ++i){
+    for (j = 0; j < d_n; ++j){
+      Coefficient_Matrix_truncated(i, j) = 0;
+      for (k = 0; k < p; ++k){
+        Coefficient_Matrix_truncated(i, j) = Coefficient_Matrix_truncated(i, j) +
+          (Centered_Data(i, k) * Eigenvectors_sorted_truncated(k, j));
+      }
+    }
+  }
+  
   return ConfidenceSet;
 }
 
