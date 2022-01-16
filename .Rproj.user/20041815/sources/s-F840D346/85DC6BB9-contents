@@ -142,8 +142,6 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   
   
   
-  Data = Data_reduced;
-  
   return ConfidenceSet;
 }
 
@@ -155,19 +153,19 @@ Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weig
   
   Hessian = zeros(d_n);
   for i=1:n
-    Hessian = Hessian + ( (1 / sqrt( sum((Quantile - Data(i,:)).^2) )) * eye(d_n)...
-      - (1 / ( sqrt( sum((Quantile - Data(i,:)).^2) ) )^3) *...
-      ( (Quantile - Data(i,:))' * (Quantile - Data(i,:)) ) ) * Weights(i);
+    Hessian = Hessian + ( (1 / sqrt( sum((Quantile - Data_reduced(i,:)).^2) )) * eye(d_n)...
+      - (1 / ( sqrt( sum((Quantile - Data_reduced(i,:)).^2) ) )^3) *...
+      ( (Quantile - Data_reduced(i,:))' * (Quantile - Data_reduced(i,:)) ) ) * Weights(i);
   end
     Hessian = Hessian / sum(Weights);
   
   t1matrix = zeros(d_n);
   t2vector = zeros(1, d_n);
   for i=1:n
-    t1matrix = t1matrix + ( (1 / sum((Quantile - Data(i,:)).^2)) *...
-      ( (Quantile - Data(i,:))' * (Quantile - Data(i,:)) ) ) * Weights(i);
+    t1matrix = t1matrix + ( (1 / sum((Quantile - Data_reduced(i,:)).^2)) *...
+      ( (Quantile - Data_reduced(i,:))' * (Quantile - Data_reduced(i,:)) ) ) * Weights(i);
   
-  t2vector = t2vector + ( (Quantile - Data(i,:)) / sqrt( sum((Quantile - Data(i,:)).^2) ) )...
+  t2vector = t2vector + ( (Quantile - Data_reduced(i,:)) / sqrt( sum((Quantile - Data_reduced(i,:)).^2) ) )...
     * Weights(i);
     end
       t1matrix = t1matrix / sum(Weights);
