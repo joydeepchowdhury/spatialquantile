@@ -159,7 +159,14 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
         }
         temp1 = sqrt(temp);
         
-        Hessian(j, k) = Hessian(j, k) + 
+        if (j == k){
+          Hessian(j, k) = Hessian(j, k) + (((1 / temp1) - ((1 / pow(temp1, 3)) *
+            (quantile[j] - Data_reduced(i, j)) * (quantile[k] - Data_reduced(i, k)))) * Weights[i]);
+        }else{
+          Hessian(j, k) = Hessian(j, k) - (((1 / pow(temp1, 3)) *
+            (quantile[j] - Data_reduced(i, j)) * (quantile[k] - Data_reduced(i, k))) * Weights[i]);
+        }
+        
       }
     }
   }
