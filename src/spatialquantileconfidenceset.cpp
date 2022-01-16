@@ -166,10 +166,11 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
           Hessian(j, k) = Hessian(j, k) - (((1 / pow(temp1, 3)) *
             (quantile[j] - Data_reduced(i, j)) * (quantile[k] - Data_reduced(i, k))) * Weights[i]);
         }
-        
       }
     }
   }
+  
+  arma::mat t1matrix(d_n, d_n);
   
   
   
@@ -178,16 +179,6 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
 
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
-  
-
-  
-  Hessian = zeros(d_n);
-  for i=1:n
-    Hessian = Hessian + ( (1 / sqrt( sum((Quantile - Data_reduced(i,:)).^2) )) * eye(d_n)...
-      - (1 / ( sqrt( sum((Quantile - Data_reduced(i,:)).^2) ) )^3) *...
-      ( (Quantile - Data_reduced(i,:))' * (Quantile - Data_reduced(i,:)) ) ) * Weights(i);
-  end
-    Hessian = Hessian / sum(Weights);
   
   t1matrix = zeros(d_n);
   t2vector = zeros(1, d_n);
