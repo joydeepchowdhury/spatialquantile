@@ -115,16 +115,19 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  arma::mat Eigenvectors_sorted_truncated(p, d_n);
+  for (k = 0; k < d_n; ++k){
+    for (j = 0; j < p; ++k){
+      Eigenvectors_sorted_truncated(j, k) = Eigenvectors_sorted(j, k);
+    }
+  }
+  
   return ConfidenceSet;
 }
 
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-[Eigenvectors, Eigenvalues] = eig(Weighted_Cov_Matrix);
-vector_Eigenvalues = diag(Eigenvalues);
-[~, index_Eigenvalues_sorted] = sort(vector_Eigenvalues,'descend');
-Eigenvectors_sorted = Eigenvectors(:,index_Eigenvalues_sorted);
 Coefficient_Matrix = Centred_Data * Eigenvectors_sorted;
 Eigenvectors_sorted_truncated = Eigenvectors_sorted(:,1:d_n);
 Coefficient_Matrix_truncated = Coefficient_Matrix(:,1:d_n);
