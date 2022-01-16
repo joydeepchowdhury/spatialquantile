@@ -133,15 +133,16 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  arma::mat Data_reduced = Coefficient_Matrix_truncated;
+  
+  Data = Data_reduced;
+  
   return ConfidenceSet;
 }
 
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-Coefficient_Matrix = Centred_Data * Eigenvectors_sorted;
-Eigenvectors_sorted_truncated = Eigenvectors_sorted(:,1:d_n);
-Coefficient_Matrix_truncated = Coefficient_Matrix(:,1:d_n);
 Data_reduced = Coefficient_Matrix_truncated;
 
 Data = Data_reduced;
