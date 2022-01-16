@@ -25,7 +25,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   int p = Data.n_cols;
   arma::mat ConfidenceSet(2, p);
   
-  int i, j, k;
+  int i, j, k, l;
   
   // Checking whether there is only one distinct observation in Data
   arma::vec z(p);
@@ -145,6 +145,22 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     quantile[j] = 0;
     for (k = 0; k < p; ++k){
       quantile[j] = quantile[j] + (quantile_shifted[k] * Eigenvectors_sorted_truncated(k, j));
+    }
+  }
+  
+  arma::mat Hessian(d_n, d_n);
+  for (j = 0; j < d_n; ++j){
+    for (k = 0; k < d_n; ++k){
+      Hessian(j, k) = 0;
+      for (i = 0; i < n; ++i){
+        temp1 = 0;
+        for (l = 0; l < d_n; ++l){
+          temp1 = temp1 + pow(quantile[l] - Data_reduced(i, l), 2);
+        }
+        temp1 = sqrt(temp);
+        
+        Hessian(j, k) = Hessian(j, k) + 
+      }
     }
   }
   
