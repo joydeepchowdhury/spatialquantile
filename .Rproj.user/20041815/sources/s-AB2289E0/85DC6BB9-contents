@@ -140,6 +140,14 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     quantile_shifted[j] = quantile_shifted[j] - Weighted_Mean[j];
   }
   
+  arma::vec quantile(d_n);
+  for (j = 0; j < d_n; ++j){
+    quantile[j] = 0;
+    for (k = 0; k < p; ++k){
+      quantile[j] = quantile[j] + (quantile_shifted[k] * Eigenvectors_sorted_truncated(k, j));
+    }
+  }
+  
   
   
   return ConfidenceSet;
@@ -148,8 +156,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-Quantile = (spatialquantile(Data_original, Weights, u_index, c, t_vector) - Weighted_Mean)...
-  * Eigenvectors_sorted_truncated;
+
   
   Hessian = zeros(d_n);
   for i=1:n
