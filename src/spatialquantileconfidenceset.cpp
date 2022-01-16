@@ -104,6 +104,17 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  arma::vec Eigenvalues;
+  arma::mat Eigenvectors;
+  eig_sym(Eigenvalues, Eigenvectors, Weighted_Cov_Matrix);
+  arma::uvec index_Eigenvalues_sorted = arma::sort_index(Eigenvalues, "descend");
+  arma::mat Eigenvectors_sorted(p, p);
+  for (k = 0; k < p; ++k){
+    for (j = 0; j < p; ++j){
+      Eigenvectors_sorted(j, k) = Eigenvectors(j, index_Eigenvalues_sorted[k]);
+    }
+  }
+  
   return ConfidenceSet;
 }
 
