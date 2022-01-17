@@ -180,10 +180,21 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
         for (l = 0; l < d_n; ++l){
           temp1 = temp1 + pow(quantile[l] - Data_reduced(i, l), 2);
         }
+        
+        t1matrix(j, k) = t1matrix(j, k) + ((1 / temp1) *
+          (quantile[j] - Data_reduced(i, j)) * (quantile[k] - Data_reduced(i, k)) * Weights[i]);
+      }
+    }
+  }
+  for (j = 0; j < d_n; ++j){
+    t2vector[j] = 0;
+    for (i = 0; i < n; ++i){
+      temp1 = 0;
+      for (l = 0; l < d_n; ++l){
+        temp1 = temp1 + pow(quantile[l] - Data_reduced(i, l), 2);
       }
       
-      
-      
+      t2vector[j] = t2vector[j] + (((quantile[j] - Data_reduced(i, j)) / sqrt(temp1)) * Weights[i]);
     }
   }
   
