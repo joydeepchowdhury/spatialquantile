@@ -198,6 +198,13 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  arma::mat CovMatrix(d_n, d_n);
+  for (j = 0; j < d_n; ++j){
+    for (k = 0; k < d_n; ++k){
+      CovMatrix(j, k) = t1matrix(j, k) - (t2vector[j] * t2vector[k]);
+    }
+  }
+  
   
   
   return ConfidenceSet;
@@ -206,16 +213,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-  t1matrix = zeros(d_n);
-  t2vector = zeros(1, d_n);
-  for i=1:n
-    t1matrix = t1matrix + ( (1 / sum((Quantile - Data_reduced(i,:)).^2)) *...
-      ( (Quantile - Data_reduced(i,:))' * (Quantile - Data_reduced(i,:)) ) ) * Weights(i);
-  
-  t2vector = t2vector + ( (Quantile - Data_reduced(i,:)) / sqrt( sum((Quantile - Data_reduced(i,:)).^2) ) )...
-    * Weights(i);
-    end
-      t1matrix = t1matrix / sum(Weights);
+    t1matrix = t1matrix / sum(Weights);
     t2vector = t2vector / sum(Weights);
     CovMatrix = t1matrix - (t2vector' * t2vector);
     
