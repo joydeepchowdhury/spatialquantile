@@ -205,6 +205,18 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
     }
   }
   
+  int num_Weights_positive = 0;
+  for (i = 0; i < n; ++i){
+    if (Weights[i] > 0){
+      num_Weights_positive = num_Weights_positive + 1;
+    }
+  }
+  double sum_Weights_square = 0;
+  for (i = 0; i < n; ++i){
+    sum_Weights_square = sum_Weights_square + pow(Weights[i], 2);
+  }
+  double sum_Weights = 1;
+  
   
   
   return ConfidenceSet;
