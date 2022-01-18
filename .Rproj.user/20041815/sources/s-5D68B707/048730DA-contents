@@ -32,3 +32,22 @@ for i=1:number_of_points
 difference = (ones(size(X_data,1),1) * y) - X_data;
 norm_difference = sqrt(trapz(t_vector, difference.^2, 2));
 check_nonzero_norm = (norm_difference ~= 0);
+if sum(check_nonzero_norm) == 0
+weighted_average = zeros(size(difference));
+else
+  difference_proper = difference(check_nonzero_norm,:);
+norm_difference_proper = norm_difference(check_nonzero_norm,:);
+weights_proper = X_data_weights(check_nonzero_norm);
+scaled_difference_proper = difference_proper ./ ...
+  ( norm_difference_proper * ones(1,size(difference_proper,2)) );
+scaled_difference_proper_weighted = ( weights_proper * ones(1,size(difference_proper,2)) )...
+                                                                                          .* scaled_difference_proper;
+weighted_average = sum(scaled_difference_proper_weighted,1) / sum(X_data_weights);
+end
+  
+  weighted_spatial_depth_y = 1 - sqrt(trapz(t_vector, weighted_average.^2));
+wsd(i) = weighted_spatial_depth_y;
+end
+  
+  [~,rankings] = sort(wsd, 'descend');
+end
