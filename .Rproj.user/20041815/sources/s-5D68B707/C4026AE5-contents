@@ -132,7 +132,7 @@ arma::vec spatialquantile(arma::mat Data, arma::vec Weights, int u_index, double
   }
   arma::vec Eigenvalues;
   arma::mat Eigenvectors;
-  eig_sym(Eigenvalues, Eigenvectors, Weighted_Cov_Matrix);
+  arma::eig_sym(Eigenvalues, Eigenvectors, Weighted_Cov_Matrix);
   arma::uvec index_Eigenvalues_sorted = arma::sort_index(Eigenvalues, "descend");
   arma::mat Eigenvectors_sorted(p, p);
   for (k = 0; k < p; ++k){
