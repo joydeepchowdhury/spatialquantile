@@ -23,3 +23,12 @@ function rankings = wsdrank(X_to_rank, X_data, X_data_weights, t_vector)
   % and t_vector is a row vector recording the grid on which the values of
   % the functional observations underlying X_data and X_to_rank are recorded.
   % The number p must be greater than 1.
+  
+  number_of_points = size(X_to_rank,1);
+wsd = zeros(number_of_points,1);
+for i=1:number_of_points
+  y = X_to_rank(i,:);
+
+difference = (ones(size(X_data,1),1) * y) - X_data;
+norm_difference = sqrt(trapz(t_vector, difference.^2, 2));
+check_nonzero_norm = (norm_difference ~= 0);
