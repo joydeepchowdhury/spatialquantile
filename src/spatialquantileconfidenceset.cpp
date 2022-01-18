@@ -222,7 +222,14 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   arma::mat tempmatrix = arma::trans(arma::solve(arma::trans(Hessian), arma::trans(CovMatrix)));
   arma::mat CovQuantileMatrix = (E_2 / pow(E_1, 2)) * arma::solve(Hessian, tempmatrix);
   
-  arma::vec eigenvalues_CovQuantileMatrix = arma::eig_sym(CovQuantileMatrix)
+  arma::vec eigenvalues_CovQuantileMatrix = arma::sort(arma::eig_sym(CovQuantileMatrix), "descend");
+  
+  arma::vec d_n_power_vector(d_n);
+  for (j = 0; j < d_n; ++j){
+    d_n_power_vector[j] = pow(2, (j + 1));
+  }
+  
+  
   
   
   
