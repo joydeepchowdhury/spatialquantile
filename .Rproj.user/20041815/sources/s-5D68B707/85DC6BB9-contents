@@ -228,7 +228,10 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   for (j = 0; j < d_n; ++j){
     d_n_power_vector[j] = pow(2, (j + 1));
   }
-  
+  arma::vec probvector(d_n);
+  for (j = 0; j < d_n; ++j){
+    probvector[j] = 1 - pow((1 - alpha), 1 / d_n_power_vector[j]);
+  }
   
   
   
@@ -239,8 +242,6 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
 
 function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
   
-    E_2 = sum(Weights.^2) / sum((Weights > 0));
-    E_1 = sum(Weights) / sum((Weights > 0));
     CovQuantileMatrix = (E_2 / (E_1^2)) * ( Hessian \ (CovMatrix / Hessian) );
     eigenCovQuantileMatrix = eig(CovQuantileMatrix);
     
