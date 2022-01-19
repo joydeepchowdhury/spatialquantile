@@ -248,10 +248,13 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   arma::mat ConfidenceSet(2, p);
   for (j = 0; j < p; ++j){
     ConfidenceSet(0, j) = 0;
+    ConfidenceSet(1, j) = 0;
+    
+    for (k = 0; k < d_n; ++k){
+      ConfidenceSet(0, j) = ConfidenceSet(0, j) + (UpperCutoffs[k] * Eigenvectors_sorted_truncated(j, k));
+      ConfidenceSet(1, j) = ConfidenceSet(1, j) + (LowerCutoffs[k] * Eigenvectors_sorted_truncated(j, k));
+    }
   }
-  
-  
-  
   
   return ConfidenceSet;
 }
