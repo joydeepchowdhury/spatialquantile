@@ -254,17 +254,13 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
       ConfidenceSet(0, j) = ConfidenceSet(0, j) + (UpperCutoffs[k] * Eigenvectors_sorted_truncated(j, k));
       ConfidenceSet(1, j) = ConfidenceSet(1, j) + (LowerCutoffs[k] * Eigenvectors_sorted_truncated(j, k));
     }
+    ConfidenceSet(0, j) = ConfidenceSet(0, j) / sqrt(n);
+    ConfidenceSet(1, j) = ConfidenceSet(1, j) / sqrt(n);
   }
   
   return ConfidenceSet;
 }
 
-
-function ConfidenceSet = spatialquantileconfidenceset(Data_original, Weights, u_index, c, t_vector, alpha)
-  
-    CovQuantileMatrix = (E_2 / (E_1^2)) * ( Hessian \ (CovMatrix / Hessian) );
-    eigenCovQuantileMatrix = eig(CovQuantileMatrix);
-    
     probvector = 1 - (1 - alpha).^( 1 ./ (2.^(1:d_n)) );
     UpperCutoffs = sqrt(eigenCovQuantileMatrix)' .* norminv((1 - (probvector / 2)), 0, 1);
     LowerCutoffs = sqrt(eigenCovQuantileMatrix)' .* norminv((probvector / 2), 0, 1);
