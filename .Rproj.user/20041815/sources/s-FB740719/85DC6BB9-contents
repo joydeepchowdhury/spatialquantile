@@ -235,11 +235,14 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   arma::vec upperprob(d_n);
   arma::vec lowerprob(d_n);
   for (j = 0; j < d_n; ++j){
-    upperprob[j] = 1 - (probvector[j] / 2);
-    lowerprob[j] = probvector[j] / 2;
+    upperprob[j] = Rcpp::qnorm(1 - (probvector[j] / 2), mean = 0.0, sd = 1.0, lower = true, log = false);
+    lowerprob[j] = Rcpp::qnorm(probvector[j] / 2, mean = 0.0, sd = 1.0, lower = true, log = false);
   }
   
-  
+  arma::vec UpperCutoffs(d_n);
+  for (j = 0; j < d_n; ++j){
+    UpperCutoffs[j] = sqrt(eigenvalues_CovQuantileMatrix[j]) * Rcpp::qnorm((1 - (probvector[j] / 2)), )
+  }
   
   
   
