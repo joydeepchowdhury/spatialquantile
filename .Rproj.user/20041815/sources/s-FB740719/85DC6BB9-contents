@@ -232,6 +232,14 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   for (j = 0; j < d_n; ++j){
     probvector[j] = 1 - pow((1 - alpha), 1 / d_n_power_vector[j]);
   }
+  arma::vec upperprob(d_n);
+  arma::vec lowerprob(d_n);
+  for (j = 0; j < d_n; ++j){
+    upperprob[j] = 1 - (probvector[j] / 2);
+    lowerprob[j] = probvector[j] / 2;
+  }
+  
+  
   
   
   
