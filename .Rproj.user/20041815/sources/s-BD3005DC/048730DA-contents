@@ -54,15 +54,46 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
       }
     }
     
-    arma::vec index_nonzero_norm(num_nonzero_norm);
-    index = 0;
-    for (k = 0; k < n; ++k){
-      if (norm_difference[k] != 0){
-        index_nonzero_norm[index] = k;
-        index = index + 1;
+    if (num_nonzero_norm == 0){
+      arma::mat weighted_average(n, p);
+      for (k = 0; k < n; ++k){
+        for (j = 0; j < p; ++j){
+          weighted_average(k, j) = 0;
+        }
+      }
+      
+      // NEED TO DEBUG HERE!!!!
+      
+      
+      
+    }else{
+      arma::mat difference_proper(num_nonzero_norm, p);
+      arma::vec norm_difference_proper(num_nonzero_norm);
+      arma::vec weights_proper(num_nonzero_norm);
+      index = 0;
+      for (k = 0; k < n; ++k){
+        if (norm_difference[k] != 0){
+          for (j = 0; j < p; ++j){
+            difference_proper(index, j) = difference(k, j);
+          }
+          
+          norm_difference_proper[index] = norm_difference[k];
+          
+          weights_proper[index] = X_data_weights[k];
+          
+          index = index + 1;
+        }
+      }
+      
+      
+      for (k = 0; k < n; ++k){
+        if ()
+        for (j)
       }
       
     }
+    
+    
     
   }
   
