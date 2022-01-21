@@ -28,11 +28,13 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
   arma::vec y(p);
   arma::mat difference(n, p);
   arma::vec norm_difference(n);
+  double num_nonzero_norm;
   for (i = 0; i < number_of_points; ++i){
     for (j = 0; j < p; ++j){
       y[j] = X_to_rank(i, j);
     }
     
+    num_nonzero_norm = 0;
     for (k = 0; k < n; ++k){
       temp = 0;
       
@@ -41,9 +43,14 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
       }
       
       for (j = 0; j < (p - 1); ++j){
+        // Integration computed using trapezoidal rule
         temp = temp + ((pow(difference(k, j + 1), 2) + pow(difference(k, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
       }
       norm_difference[k] = sqrt(temp);
+      
+      if (norm_difference[k] != 0){
+        num_nonzero_norm = num_nonzero_norm + 1;
+      }
     }
     
   }
@@ -53,16 +60,6 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
 
 
 
-arma::vec norm_difference(n);
-double temp1;
-for (i = 0; i < n; ++i){
-  temp1 = 0;
-  for (j = 0; j < (p - 1); ++j){
-    // Integration computed using trapezoidal rule
-    temp1 = temp1 + ((pow(Difference(i, j + 1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
-  }
-  norm_difference[i] = sqrt(temp1);
-}
 
 
 
