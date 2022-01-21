@@ -18,9 +18,18 @@
 // [[Rcpp::export]]
 arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vector){
   int number_of_points = X_to_rank.n_rows;
+  int p = X_to_rank.n_cols;
+  
+  int i, j, k;
   
   arma::vec wsd(number_of_points);
-  
+  arma::vec y(p);
+  for (i = 0; i < number_of_points; ++i){
+    for (j = 0; j < p; ++j){
+      y[j] = X_to_rank(i, j);
+    }
+    
+  }
   
 }
 
