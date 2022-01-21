@@ -29,6 +29,7 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
   arma::mat difference(n, p);
   arma::vec norm_difference(n);
   double num_nonzero_norm;
+  int index;
   for (i = 0; i < number_of_points; ++i){
     for (j = 0; j < p; ++j){
       y[j] = X_to_rank(i, j);
@@ -53,29 +54,25 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
       }
     }
     
+    arma::vec index_nonzero_norm(num_nonzero_norm);
+    index = 0;
+    for (k = 0; k < n; ++k){
+      if (norm_difference[k] != 0){
+        index_nonzero_norm[index] = k;
+        index = index + 1;
+      }
+      
+    }
+    
   }
   
 }
 
 
 
-
-
-
-
-
-
-
-
 function rankings = wsdrank(X_to_rank, X_data, X_data_weights, t_vector)
   
   
-  
-  number_of_points = size(X_to_rank,1);
-wsd = zeros(number_of_points,1);
-for i=1:number_of_points
-  y = X_to_rank(i,:);
-
 difference = (ones(size(X_data,1),1) * y) - X_data;
 norm_difference = sqrt(trapz(t_vector, difference.^2, 2));
 check_nonzero_norm = (norm_difference ~= 0);
