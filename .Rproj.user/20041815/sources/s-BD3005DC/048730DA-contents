@@ -22,21 +22,46 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
   int p = X_data.n_cols;
   
   int i, j, k;
+  double temp;
   
   arma::vec wsd(number_of_points);
   arma::vec y(p);
   arma::mat difference(n, p);
+  arma::vec norm_difference(n);
   for (i = 0; i < number_of_points; ++i){
     for (j = 0; j < p; ++j){
       y[j] = X_to_rank(i, j);
     }
     
     for (k = 0; k < n; ++k){
-      for (j = 0; j < p; ++j)
+      temp = 0;
+      
+      for (j = 0; j < p; ++j){
+        difference(k, j) = y[j] - X_data(k, j);
+      }
+      
+      for (j = 0; j < (p - 1); ++j){
+        temp = temp + ((pow(difference(k, j + 1), 2) + pow(difference(k, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
+      }
+      norm_difference[k] = sqrt(temp);
     }
     
   }
   
+}
+
+
+
+
+arma::vec norm_difference(n);
+double temp1;
+for (i = 0; i < n; ++i){
+  temp1 = 0;
+  for (j = 0; j < (p - 1); ++j){
+    // Integration computed using trapezoidal rule
+    temp1 = temp1 + ((pow(Difference(i, j + 1), 2) + pow(Difference(i, j), 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
+  }
+  norm_difference[i] = sqrt(temp1);
 }
 
 
