@@ -92,6 +92,12 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
         }
       }
       
+      arma::mat scaled_difference_proper_weighted(num_nonzero_norm, p);
+      for (k = 0; k < num_nonzero_norm; ++k){
+        for (j = 0; j < p; ++j){
+          scaled_difference_proper_weighted(k, j) = weights_proper[k] * scaled_difference_proper(k, j);
+        }
+      }
       
       
       
