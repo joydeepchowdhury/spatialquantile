@@ -55,15 +55,7 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
     }
     
     if (num_nonzero_norm == 0){
-      arma::mat weighted_average(n, p);
-      for (k = 0; k < n; ++k){
-        for (j = 0; j < p; ++j){
-          weighted_average(k, j) = 0;
-        }
-      }
-      
-      // NEED TO DEBUG HERE!!!!
-      
+      double weighted_spatial_depth_y = 1;
       
       
     }else{
@@ -113,8 +105,15 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
         weighted_average[j] = weighted_average[j] / sum_X_data_weights;
       }
       
+      temp = 0;
+      for (j = 0; j < (p - 1); ++j){
+        // Integration computed using trapezoidal rule
+        temp = temp + ((pow(weighted_average[j + 1], 2) + pow(weighted_average[j], 2)) / 2) * (t_vector[j + 1] - t_vector[j]);
+      }
       
+      double weighted_spatial_depth_y = 1 - sqrt(temp);
       
+      wsd[i] = weighted_spatial_depth_y;
     }
     
     
