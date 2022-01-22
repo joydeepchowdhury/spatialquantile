@@ -99,6 +99,15 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
         }
       }
       
+      arma::vec weighted_average(p);
+      for (j = 0; j < p; ++j){
+        weighted_average[j] = 0;
+        for (k = 0; k < num_nonzero_norm; ++k){
+          weighted_average[j] = weighted_average[j] + scaled_difference_proper_weighted(k, j);
+        }
+        weighted_average[j] = weighted_average[j] / 
+      }
+      
       
       
     }
