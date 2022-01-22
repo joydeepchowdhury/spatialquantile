@@ -57,7 +57,7 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
     if (num_nonzero_norm == 0){
       double weighted_spatial_depth_y = 1;
       
-      
+      wsd[i] = weighted_spatial_depth_y;
     }else{
       arma::mat difference_proper(num_nonzero_norm, p);
       arma::vec norm_difference_proper(num_nonzero_norm);
@@ -115,35 +115,14 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
       
       wsd[i] = weighted_spatial_depth_y;
     }
-    
-    
-    
   }
   
+  arma::uvec rankings_temp = arma::sort_index(wsd, "descend");
+  
+  arma::vec rankings(number_of_points);
+  for (i = 0; i < number_of_points; ++i){
+    rankings[i] = rankings_temp[i];
+  }
+  
+  return rankings;
 }
-
-
-
-function rankings = wsdrank(X_to_rank, X_data, X_data_weights, t_vector)
-  
-norm_difference = sqrt(trapz(t_vector, difference.^2, 2));
-check_nonzero_norm = (norm_difference ~= 0);
-if sum(check_nonzero_norm) == 0
-weighted_average = zeros(size(difference));
-else
-  difference_proper = difference(check_nonzero_norm,:);
-norm_difference_proper = norm_difference(check_nonzero_norm,:);
-weights_proper = X_data_weights(check_nonzero_norm);
-scaled_difference_proper = difference_proper ./ ...
-  ( norm_difference_proper * ones(1,size(difference_proper,2)) );
-scaled_difference_proper_weighted = ( weights_proper * ones(1,size(difference_proper,2)) )...
-                                                                                          .* scaled_difference_proper;
-weighted_average = sum(scaled_difference_proper_weighted,1) / sum(X_data_weights);
-end
-  
-  weighted_spatial_depth_y = 1 - sqrt(trapz(t_vector, weighted_average.^2));
-wsd(i) = weighted_spatial_depth_y;
-end
-  
-  [~,rankings] = sort(wsd, 'descend');
-end
