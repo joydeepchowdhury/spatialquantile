@@ -130,7 +130,17 @@
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/wsdrank.cpp",
-        "file_last_write": 1642688837.0,
-        "definitions": []
+        "file_last_write": 1642793132.0,
+        "definitions": [
+            {
+                "usr": "c:@F@wsdrank#I#I#I#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "wsdrank(int, int, int, int)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/wsdrank.cpp",
+                "line": 19,
+                "column": 11
+            }
+        ]
     }
 ]

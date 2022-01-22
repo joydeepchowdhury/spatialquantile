@@ -86,10 +86,6 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
       }
       
       
-      for (k = 0; k < n; ++k){
-        if ()
-        for (j)
-      }
       
     }
     
