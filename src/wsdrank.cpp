@@ -99,13 +99,18 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
         }
       }
       
+      double sum_X_data_weights = 0;
+      for (k = 0; k < n; ++k){
+        sum_X_data_weights = sum_X_data_weights + X_data_weights[k];
+      }
+      
       arma::vec weighted_average(p);
       for (j = 0; j < p; ++j){
         weighted_average[j] = 0;
         for (k = 0; k < num_nonzero_norm; ++k){
           weighted_average[j] = weighted_average[j] + scaled_difference_proper_weighted(k, j);
         }
-        weighted_average[j] = weighted_average[j] / 
+        weighted_average[j] = weighted_average[j] / sum_X_data_weights;
       }
       
       
@@ -122,8 +127,6 @@ arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, X_data_weights, t_vecto
 
 function rankings = wsdrank(X_to_rank, X_data, X_data_weights, t_vector)
   
-  
-difference = (ones(size(X_data,1),1) * y) - X_data;
 norm_difference = sqrt(trapz(t_vector, difference.^2, 2));
 check_nonzero_norm = (norm_difference ~= 0);
 if sum(check_nonzero_norm) == 0
