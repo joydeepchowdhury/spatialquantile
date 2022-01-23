@@ -128,7 +128,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
       Coefficient_Matrix_truncated(i, j) = 0;
       for (k = 0; k < p; ++k){
         Coefficient_Matrix_truncated(i, j) = Coefficient_Matrix_truncated(i, j) +
-          (Centered_Data(i, k) * Eigenvectors_sorted_truncated(k, j));
+          (Centred_Data(i, k) * Eigenvectors_sorted_truncated(k, j));
       }
     }
   }
@@ -157,7 +157,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
         for (l = 0; l < d_n; ++l){
           temp1 = temp1 + pow(quantile[l] - Data_reduced(i, l), 2);
         }
-        temp1 = sqrt(temp);
+        temp1 = sqrt(temp1);
         
         if (j == k){
           Hessian(j, k) = Hessian(j, k) + (((1 / temp1) - ((1 / pow(temp1, 3)) *
@@ -215,9 +215,9 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   for (i = 0; i < n; ++i){
     sum_Weights_square = sum_Weights_square + pow(Weights[i], 2);
   }
-  double sum_Weights = 1;
-  E_2 = sum_Weights_square / num_Weights_positive;
-  E_1 = sum_Weights / num_Weights_positive;
+  sum_Weights = 1;
+  double E_2 = sum_Weights_square / num_Weights_positive;
+  double E_1 = sum_Weights / num_Weights_positive;
   
   arma::mat tempmatrix = arma::trans(arma::solve(arma::trans(Hessian), arma::trans(CovMatrix)));
   arma::mat CovQuantileMatrix = (E_2 / pow(E_1, 2)) * arma::solve(Hessian, tempmatrix);
@@ -240,12 +240,12 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   }
   
   arma::vec UpperCutoffs(d_n);
+  arma::vec LowerCutoffs(d_n);
   for (j = 0; j < d_n; ++j){
     UpperCutoffs[j] = sqrt(eigenvalues_CovQuantileMatrix[j]) * upperprob[j];
-    LowerCutoffs[j] = sqrt(eigenvalues_CovQuantileMatrix[j]) * lowerprob[j]
+    LowerCutoffs[j] = sqrt(eigenvalues_CovQuantileMatrix[j]) * lowerprob[j];
   }
   
-  arma::mat ConfidenceSet(2, p);
   for (j = 0; j < p; ++j){
     ConfidenceSet(0, j) = 0;
     ConfidenceSet(1, j) = 0;
