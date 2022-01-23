@@ -1,51 +1,13 @@
 [
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-        "file_last_write": 1641830772.0,
-        "definitions": [
-            {
-                "usr": "c:@F@Lp_norm#I#I#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "Lp_norm(int, int, double)",
-                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-                "line": 32,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@crossvalidation#I#I#I#I#I#*C#S0_#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "crossvalidation(int, int, int, int, int, char *, char *)",
-                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-                "line": 55,
-                "column": 8
-            }
-        ]
+        "file_last_write": 1642966482.0,
+        "definitions": []
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-        "file_last_write": 1641831506.0,
-        "definitions": [
-            {
-                "usr": "c:@F@kernel#d#*C#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "kernel(double, char *)",
-                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-                "line": 26,
-                "column": 8
-            },
-            {
-                "usr": "c:@F@kernelweights#I#I#I#d#*C#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "kernelweights(int, int, int, double, char *)",
-                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-                "line": 45,
-                "column": 11
-            }
-        ]
+        "file_last_write": 1642967250.0,
+        "definitions": []
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
@@ -115,22 +77,12 @@
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantileconfidenceset.cpp",
-        "file_last_write": 1642613882.0,
-        "definitions": [
-            {
-                "usr": "c:@F@spatialquantileconfidenceset#I#I#I#d#I#d#",
-                "kind": 6,
-                "parent_name": "",
-                "name": "spatialquantileconfidenceset(int, int, int, double, int, double)",
-                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantileconfidenceset.cpp",
-                "line": 21,
-                "column": 11
-            }
-        ]
+        "file_last_write": 1642966486.0,
+        "definitions": []
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/wsdrank.cpp",
-        "file_last_write": 1642867649.0,
+        "file_last_write": 1642967309.0,
         "definitions": [
             {
                 "usr": "c:@F@wsdrank#I#I#I#I#",
