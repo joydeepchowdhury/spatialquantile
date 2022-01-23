@@ -25,6 +25,10 @@ spatialquantile <- function(Data, Weights, u_index, c, t_vector) {
     .Call(`_spatialquantile_spatialquantile`, Data, Weights, u_index, c, t_vector)
 }
 
+spatialquantileconfidenceset <- function(Data, Weights, u_index, c, t_vector, alpha) {
+    .Call(`_spatialquantile_spatialquantileconfidenceset`, Data, Weights, u_index, c, t_vector, alpha)
+}
+
 wsdrank <- function(X_to_rank, X_data, X_data_weights, t_vector) {
     .Call(`_spatialquantile_wsdrank`, X_to_rank, X_data, X_data_weights, t_vector)
 }

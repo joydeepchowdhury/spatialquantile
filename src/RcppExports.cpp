@@ -83,6 +83,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// spatialquantileconfidenceset
+arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights, int u_index, double c, arma::vec t_vector, double alpha);
+RcppExport SEXP _spatialquantile_spatialquantileconfidenceset(SEXP DataSEXP, SEXP WeightsSEXP, SEXP u_indexSEXP, SEXP cSEXP, SEXP t_vectorSEXP, SEXP alphaSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::mat >::type Data(DataSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type Weights(WeightsSEXP);
+    Rcpp::traits::input_parameter< int >::type u_index(u_indexSEXP);
+    Rcpp::traits::input_parameter< double >::type c(cSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t_vector(t_vectorSEXP);
+    Rcpp::traits::input_parameter< double >::type alpha(alphaSEXP);
+    rcpp_result_gen = Rcpp::wrap(spatialquantileconfidenceset(Data, Weights, u_index, c, t_vector, alpha));
+    return rcpp_result_gen;
+END_RCPP
+}
 // wsdrank
 arma::vec wsdrank(arma::mat X_to_rank, arma::mat X_data, arma::mat X_data_weights, arma::vec t_vector);
 RcppExport SEXP _spatialquantile_wsdrank(SEXP X_to_rankSEXP, SEXP X_dataSEXP, SEXP X_data_weightsSEXP, SEXP t_vectorSEXP) {
@@ -105,6 +121,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_spatialquantile_rcpparma_bothproducts", (DL_FUNC) &_spatialquantile_rcpparma_bothproducts, 1},
     {"_spatialquantile_g_function_weighted", (DL_FUNC) &_spatialquantile_g_function_weighted, 4},
     {"_spatialquantile_spatialquantile", (DL_FUNC) &_spatialquantile_spatialquantile, 5},
+    {"_spatialquantile_spatialquantileconfidenceset", (DL_FUNC) &_spatialquantile_spatialquantileconfidenceset, 6},
     {"_spatialquantile_wsdrank", (DL_FUNC) &_spatialquantile_wsdrank, 4},
     {NULL, NULL, 0}
 };
