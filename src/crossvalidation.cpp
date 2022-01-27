@@ -1,6 +1,7 @@
 # include <RcppArmadillo.h>
 # include <algorithm>
 # include <string.h>
+# include "spatialquantile.hpp"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -43,7 +44,7 @@ double Lp_norm(arma::vec t_vector, arma::vec X, double p){
     lp_norm = pow(temp, (1/p));
   }else{
     for (j = 0; j < (q - 1); ++j){
-      temp = max(temp, abs(X[j]));
+      temp = std::max(temp, abs(X[j]));
     }
     lp_norm = temp;
   }
@@ -79,8 +80,8 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }else{
         X_distance(i, j) = X_distance(j, i);
       }
-      min_X_distance = min(min_X_distance, X_distance(i, j));
-      max_X_distance = max(max_X_distance, X_distance(i, j));
+      min_X_distance = std::min(min_X_distance, X_distance(i, j));
+      max_X_distance = std::max(max_X_distance, X_distance(i, j));
     }
   }
 
@@ -119,7 +120,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
       }
     }
 
-    arma::mat h_vector_proper(h_vector_length_proper);
+    arma::vec h_vector_proper(h_vector_length_proper);
     i = 0;
     j = 0;
     while (j < h_vector_length){
@@ -178,7 +179,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
 
         Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
 
-        if (strncmp(type, "coord_median", 20) == 0){
+        if (type == "coord_median"){
           arma::vec weighted_median(q_res);
           arma::vec vector_concerned(X_distance_h_count), vector_concerned_sorted(X_distance_h_count);
           arma::vec weights_by_sorted_index(X_distance_h_count), cumulative_weights_by_sorted_index(X_distance_h_count);
@@ -207,7 +208,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = weighted_median[k];
           }
-        }else if (strncmp(type, "coord_mean", 20) == 0){
+        }else if (type == "coord_mean"){
           arma::vec weighted_mean(q_res);
           double sum_Weights;
           for (k = 0; k < q_res; ++k){
@@ -326,7 +327,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
 
         Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
 
-        if (strncmp(type, "coord_median", 20) == 0){
+        if (type == "coord_median"){
           arma::vec weighted_median(q_res);
           arma::vec vector_concerned(X_distance_h_count), vector_concerned_sorted(X_distance_h_count);
           arma::vec weights_by_sorted_index(X_distance_h_count), cumulative_weights_by_sorted_index(X_distance_h_count);
@@ -355,7 +356,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = weighted_median[k];
           }
-        }else if (strncmp(type, "coord_mean", 20) == 0){
+        }else if (type == "coord_mean"){
           arma::vec weighted_mean(q_res);
           double sum_Weights;
           for (k = 0; k < q_res; ++k){
