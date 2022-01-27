@@ -53,7 +53,7 @@
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
-        "file_last_write": 1642536933.0,
+        "file_last_write": 1643310973.0,
         "definitions": [
             {
                 "usr": "c:@F@g_function_weighted#I#I#I#I#",
@@ -61,7 +61,7 @@
                 "parent_name": "",
                 "name": "g_function_weighted(int, int, int, int)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
-                "line": 21,
+                "line": 22,
                 "column": 8
             },
             {
@@ -70,14 +70,19 @@
                 "parent_name": "",
                 "name": "spatialquantile(int, int, int, double, int)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.cpp",
-                "line": 47,
+                "line": 48,
                 "column": 11
             }
         ]
     },
     {
+        "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.hpp",
+        "file_last_write": 1643310497.0,
+        "definitions": []
+    },
+    {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantileconfidenceset.cpp",
-        "file_last_write": 1642969442.0,
+        "file_last_write": 1643311024.0,
         "definitions": [
             {
                 "usr": "c:@F@spatialquantileconfidenceset#I#I#I#d#I#d#",
@@ -85,7 +90,7 @@
                 "parent_name": "",
                 "name": "spatialquantileconfidenceset(int, int, int, double, int, double)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantileconfidenceset.cpp",
-                "line": 21,
+                "line": 22,
                 "column": 11
             }
         ]

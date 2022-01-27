@@ -1,5 +1,6 @@
 # include <RcppArmadillo.h>
 # include <algorithm>
+# include "spatialquantile.hpp"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
