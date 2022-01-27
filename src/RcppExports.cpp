@@ -11,6 +11,36 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// Lp_norm
+double Lp_norm(arma::vec t_vector, arma::vec X, double p);
+RcppExport SEXP _spatialquantile_Lp_norm(SEXP t_vectorSEXP, SEXP XSEXP, SEXP pSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type t_vector(t_vectorSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type X(XSEXP);
+    Rcpp::traits::input_parameter< double >::type p(pSEXP);
+    rcpp_result_gen = Rcpp::wrap(Lp_norm(t_vector, X, p));
+    return rcpp_result_gen;
+END_RCPP
+}
+// crossvalidation
+double crossvalidation(arma::vec t_vector_X, arma::mat X_static, arma::vec t_vector_Y, arma::mat Y_static, int method_for_h, Rcpp::String type, Rcpp::String Kernel);
+RcppExport SEXP _spatialquantile_crossvalidation(SEXP t_vector_XSEXP, SEXP X_staticSEXP, SEXP t_vector_YSEXP, SEXP Y_staticSEXP, SEXP method_for_hSEXP, SEXP typeSEXP, SEXP KernelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type t_vector_X(t_vector_XSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X_static(X_staticSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t_vector_Y(t_vector_YSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type Y_static(Y_staticSEXP);
+    Rcpp::traits::input_parameter< int >::type method_for_h(method_for_hSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type type(typeSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type Kernel(KernelSEXP);
+    rcpp_result_gen = Rcpp::wrap(crossvalidation(t_vector_X, X_static, t_vector_Y, Y_static, method_for_h, type, Kernel));
+    return rcpp_result_gen;
+END_RCPP
+}
 // kernel
 double kernel(double u, Rcpp::String Kernel);
 RcppExport SEXP _spatialquantile_kernel(SEXP uSEXP, SEXP KernelSEXP) {
@@ -142,6 +172,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_spatialquantile_Lp_norm", (DL_FUNC) &_spatialquantile_Lp_norm, 3},
+    {"_spatialquantile_crossvalidation", (DL_FUNC) &_spatialquantile_crossvalidation, 7},
     {"_spatialquantile_kernel", (DL_FUNC) &_spatialquantile_kernel, 2},
     {"_spatialquantile_kernelweights", (DL_FUNC) &_spatialquantile_kernelweights, 5},
     {"_spatialquantile_rcpparma_hello_world", (DL_FUNC) &_spatialquantile_rcpparma_hello_world, 0},
