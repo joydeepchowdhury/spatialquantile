@@ -2,6 +2,7 @@
 # include <algorithm>
 # include <string.h>
 # include "spatialquantile.hpp"
+# include "kernelweights.hpp"
 
 // [[Rcpp::depends(RcppArmadillo)]]
 
@@ -33,7 +34,7 @@
 double Lp_norm(arma::vec t_vector, arma::vec X, double p){
   int q = X.n_elem;
 
-  int i, j;
+  int j;
   double lp_norm, temp;
 
   temp = 0;
@@ -63,7 +64,6 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
   int p_covariate = 2, p_response = 2;
 
   int i, j, k, l;
-  double inf = arma::datum::inf;
 
   arma::mat X_distance(sample_size, sample_size);
   double min_X_distance = 0, max_X_distance = 0;
@@ -177,7 +177,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           }
         }
 
-        Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
+        arma::vec Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
 
         if (type == "coord_median"){
           arma::vec weighted_median(q_res);
@@ -198,7 +198,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
                   cumulative_weights_by_sorted_index[l - 1];
               }
               if (cumulative_weights_by_sorted_index[l] >= 0.5){
-                index_weighted_quantile = l;
+                int index_weighted_quantile = l;
                 weighted_median[k] = vector_concerned_sorted[index_weighted_quantile];
                 break;
               }
@@ -325,7 +325,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           }
         }
 
-        Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
+        arma::vec Weights = kernelweights(target_X, local_X_values, t_vector_X, h, Kernel);
 
         if (type == "coord_median"){
           arma::vec weighted_median(q_res);
@@ -346,7 +346,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
                   cumulative_weights_by_sorted_index[l - 1];
               }
               if (cumulative_weights_by_sorted_index[l] >= 0.5){
-                index_weighted_quantile = l;
+                int index_weighted_quantile = l;
                 weighted_median[k] = vector_concerned_sorted[index_weighted_quantile];
                 break;
               }

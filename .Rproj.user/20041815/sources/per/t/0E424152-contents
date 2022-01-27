@@ -23,7 +23,7 @@
 
 
 // [[Rcpp::export]]
-double kernel(double u, Rcpp::String Kernel){
+double kernelvalue(double u, Rcpp::String Kernel){
   if (Kernel == "gaussian"){
     return ((1 / sqrt(2 * arma::datum::pi)) * exp(- pow(u, 2) / 2));
   }else if (Kernel == "triangular"){
@@ -70,7 +70,7 @@ arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, dou
 
   double sum_Weights = 0;
   for (i = 0; i < n; ++i){
-    Weights[i] = kernel((Distance_vector[i] / h), Kernel);
+    Weights[i] = kernelvalue((Distance_vector[i] / h), Kernel);
 
     sum_Weights = sum_Weights + Weights[i];
   }

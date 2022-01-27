@@ -1,7 +1,7 @@
 [
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-        "file_last_write": 1643312014.0,
+        "file_last_write": 1643313272.0,
         "definitions": [
             {
                 "usr": "c:@F@Lp_norm#I#I#d#",
@@ -9,7 +9,7 @@
                 "parent_name": "",
                 "name": "Lp_norm(int, int, double)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-                "line": 32,
+                "line": 34,
                 "column": 8
             },
             {
@@ -18,20 +18,20 @@
                 "parent_name": "",
                 "name": "crossvalidation(int, int, int, int, int, int, int)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/crossvalidation.cpp",
-                "line": 55,
+                "line": 57,
                 "column": 8
             }
         ]
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-        "file_last_write": 1643311845.0,
+        "file_last_write": 1643313383.0,
         "definitions": [
             {
-                "usr": "c:@F@kernel#d#I#",
+                "usr": "c:@F@kernelvalue#d#I#",
                 "kind": 6,
                 "parent_name": "",
-                "name": "kernel(double, int)",
+                "name": "kernelvalue(double, int)",
                 "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
                 "line": 26,
                 "column": 8
@@ -46,6 +46,11 @@
                 "column": 11
             }
         ]
+    },
+    {
+        "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.hpp",
+        "file_last_write": 1643312923.0,
+        "definitions": []
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",
@@ -115,7 +120,7 @@
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/spatialquantile.hpp",
-        "file_last_write": 1643310497.0,
+        "file_last_write": 1643312698.0,
         "definitions": []
     },
     {

@@ -9,8 +9,8 @@ crossvalidation <- function(t_vector_X, X_static, t_vector_Y, Y_static, method_f
     .Call(`_spatialquantile_crossvalidation`, t_vector_X, X_static, t_vector_Y, Y_static, method_for_h, type, Kernel)
 }
 
-kernel <- function(u, Kernel) {
-    .Call(`_spatialquantile_kernel`, u, Kernel)
+kernelvalue <- function(u, Kernel) {
+    .Call(`_spatialquantile_kernelvalue`, u, Kernel)
 }
 
 kernelweights <- function(x, X_static, t_vector, h, Kernel) {

@@ -41,15 +41,15 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
-// kernel
-double kernel(double u, Rcpp::String Kernel);
-RcppExport SEXP _spatialquantile_kernel(SEXP uSEXP, SEXP KernelSEXP) {
+// kernelvalue
+double kernelvalue(double u, Rcpp::String Kernel);
+RcppExport SEXP _spatialquantile_kernelvalue(SEXP uSEXP, SEXP KernelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type u(uSEXP);
     Rcpp::traits::input_parameter< Rcpp::String >::type Kernel(KernelSEXP);
-    rcpp_result_gen = Rcpp::wrap(kernel(u, Kernel));
+    rcpp_result_gen = Rcpp::wrap(kernelvalue(u, Kernel));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -174,7 +174,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_spatialquantile_Lp_norm", (DL_FUNC) &_spatialquantile_Lp_norm, 3},
     {"_spatialquantile_crossvalidation", (DL_FUNC) &_spatialquantile_crossvalidation, 7},
-    {"_spatialquantile_kernel", (DL_FUNC) &_spatialquantile_kernel, 2},
+    {"_spatialquantile_kernelvalue", (DL_FUNC) &_spatialquantile_kernelvalue, 2},
     {"_spatialquantile_kernelweights", (DL_FUNC) &_spatialquantile_kernelweights, 5},
     {"_spatialquantile_rcpparma_hello_world", (DL_FUNC) &_spatialquantile_rcpparma_hello_world, 0},
     {"_spatialquantile_rcpparma_outerproduct", (DL_FUNC) &_spatialquantile_rcpparma_outerproduct, 1},
