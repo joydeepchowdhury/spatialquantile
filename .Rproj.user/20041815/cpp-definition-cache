@@ -6,8 +6,27 @@
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
-        "file_last_write": 1642967250.0,
-        "definitions": []
+        "file_last_write": 1643311845.0,
+        "definitions": [
+            {
+                "usr": "c:@F@kernel#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "kernel(double, int)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
+                "line": 26,
+                "column": 8
+            },
+            {
+                "usr": "c:@F@kernelweights#I#I#I#d#I#",
+                "kind": 6,
+                "parent_name": "",
+                "name": "kernelweights(int, int, int, double, int)",
+                "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/kernelweights.cpp",
+                "line": 45,
+                "column": 11
+            }
+        ]
     },
     {
         "file": "C:/Users/Joy/Documents/GitHub/spatialquantile/src/rcpparma_hello_world.cpp",

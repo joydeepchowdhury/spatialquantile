@@ -12,14 +12,14 @@ Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
 // kernel
-double kernel(double u, char *Kernel);
-RcppExport SEXP _spatialquantile_kernel(SEXP uSEXP, SEXP *KernelSEXP) {
+double kernel(double u, Rcpp::String Kernel);
+RcppExport SEXP _spatialquantile_kernel(SEXP uSEXP, SEXP KernelSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< double >::type u(uSEXP);
-    Rcpp::traits::input_parameter< char >::type *Kernel(*KernelSEXP);
-    rcpp_result_gen = Rcpp::wrap(kernel(u, *Kernel));
+    Rcpp::traits::input_parameter< Rcpp::String >::type Kernel(KernelSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel(u, Kernel));
     return rcpp_result_gen;
 END_RCPP
 }

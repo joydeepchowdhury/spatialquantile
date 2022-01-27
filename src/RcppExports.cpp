@@ -11,6 +11,33 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// kernel
+double kernel(double u, Rcpp::String Kernel);
+RcppExport SEXP _spatialquantile_kernel(SEXP uSEXP, SEXP KernelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< double >::type u(uSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type Kernel(KernelSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernel(u, Kernel));
+    return rcpp_result_gen;
+END_RCPP
+}
+// kernelweights
+arma::vec kernelweights(arma::vec x, arma::mat X_static, arma::vec t_vector, double h, Rcpp::String Kernel);
+RcppExport SEXP _spatialquantile_kernelweights(SEXP xSEXP, SEXP X_staticSEXP, SEXP t_vectorSEXP, SEXP hSEXP, SEXP KernelSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< arma::vec >::type x(xSEXP);
+    Rcpp::traits::input_parameter< arma::mat >::type X_static(X_staticSEXP);
+    Rcpp::traits::input_parameter< arma::vec >::type t_vector(t_vectorSEXP);
+    Rcpp::traits::input_parameter< double >::type h(hSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type Kernel(KernelSEXP);
+    rcpp_result_gen = Rcpp::wrap(kernelweights(x, X_static, t_vector, h, Kernel));
+    return rcpp_result_gen;
+END_RCPP
+}
 // rcpparma_hello_world
 arma::mat rcpparma_hello_world();
 RcppExport SEXP _spatialquantile_rcpparma_hello_world() {
@@ -115,6 +142,8 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_spatialquantile_kernel", (DL_FUNC) &_spatialquantile_kernel, 2},
+    {"_spatialquantile_kernelweights", (DL_FUNC) &_spatialquantile_kernelweights, 5},
     {"_spatialquantile_rcpparma_hello_world", (DL_FUNC) &_spatialquantile_rcpparma_hello_world, 0},
     {"_spatialquantile_rcpparma_outerproduct", (DL_FUNC) &_spatialquantile_rcpparma_outerproduct, 1},
     {"_spatialquantile_rcpparma_innerproduct", (DL_FUNC) &_spatialquantile_rcpparma_innerproduct, 1},
