@@ -76,7 +76,7 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   
   double t_1 = sqrt(n);
   double t_2 = 2 * pow(n, 1/3);
-  double t_3 = min(t_1, t_2);
+  double t_3 = std::min(t_1, t_2);
   double d_n = floor(t_3);
   
   arma::vec Weighted_Mean;
@@ -235,8 +235,8 @@ arma::mat spatialquantileconfidenceset(arma::mat Data, arma::vec Weights,
   arma::vec upperprob(d_n);
   arma::vec lowerprob(d_n);
   for (j = 0; j < d_n; ++j){
-    upperprob[j] = Rcpp::qnorm(1 - (probvector[j] / 2), mean = 0.0, sd = 1.0, lower = true, log = false);
-    lowerprob[j] = Rcpp::qnorm(probvector[j] / 2, mean = 0.0, sd = 1.0, lower = true, log = false);
+    upperprob[j] = R::qnorm(1 - (probvector[j] / 2), 0.0, 1.0, true, false);
+    lowerprob[j] = R::qnorm(probvector[j] / 2, 0.0, 1.0, true, false);
   }
   
   arma::vec UpperCutoffs(d_n);
