@@ -231,7 +231,7 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
             Type_temp(j, k) = spatialmedian[k];
           }
         }else{
-          
+          throw Rcpp::stop("Enter correct type.");
         }
 
         arma::vec y(q_res);
