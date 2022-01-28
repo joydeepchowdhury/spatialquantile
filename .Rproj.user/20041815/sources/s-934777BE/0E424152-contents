@@ -36,8 +36,10 @@ double kernelvalue(double u, Rcpp::String Kernel){
     return ((35/32) * pow((1 - pow(u, 2)), 3) * (double)(abs(u) <= 1));
   }else if (Kernel == "tricube"){
     return ((70/81) * pow((1 - pow(abs(u), 3)), 3) * (double)(abs(u) <= 1));
-  }else{
+  }else if (Kernel == "uniform"){
     return (0.5 * (double)(abs(u) <= 1));
+  }else{
+    Rcpp::stop("Enter one of the implemented kernels: gaussian, triangular, epanechnikov, quartic, triweight, tricube, uniform.");
   }
 }
 
