@@ -224,14 +224,14 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = weighted_mean[k];
           }
-        }else if (type == "coord_mean"){    // strncmp(type, "spatial_median", 20) == 0
+        }else if (type == "spatial_median"){    // strncmp(type, "spatial_median", 20) == 0
           arma::vec spatialmedian = spatialquantile(local_Y_values, Weights, 0, 0, t_vector_Y);
 
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = spatialmedian[k];
           }
         }else{
-          throw Rcpp::stop("Enter correct type.");
+          Rcpp::stop("Enter correct type.");
         }
 
         arma::vec y(q_res);
@@ -374,12 +374,14 @@ double crossvalidation(arma::vec t_vector_X, arma::mat X_static,
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = weighted_mean[k];
           }
-        }else{    // strncmp(type, "spatial_median", 20) == 0
+        }else if (type == "spatial_median"){    // strncmp(type, "spatial_median", 20) == 0
           arma::vec spatialmedian = spatialquantile(local_Y_values, Weights, 0, 0, t_vector_Y);
 
           for (k = 0; k < q_res; ++k){
             Type_temp(j, k) = spatialmedian[k];
           }
+        }else{
+          Rcpp::stop("Enter correct type.");
         }
 
         arma::vec y(q_res);
